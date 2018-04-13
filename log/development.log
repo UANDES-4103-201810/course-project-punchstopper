@@ -1909,3 +1909,715 @@ Processing by UsersController#index as HTML
 Completed 200 OK in 171ms (Views: 152.2ms | ActiveRecord: 1.3ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-04-13 18:59:44 -0300
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 900ms (Views: 879.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:05:26 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (10.2ms)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (The asset "logo.png" is not present in the asset pipeline.):
+    1: <%= image_tag("logo.png", :alt => "PunchStopper") %>
+    2: <p>Where the punches stop, and the kicks start</p>
+    3: 
+    4: <table>
+  
+app/views/welcome/index.html.erb:1:in `_app_views_welcome_index_html_erb___3210543630679501477_69879868120260'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:06:10 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 123ms (Views: 121.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/images/logo.png" for 127.0.0.1 at 2018-04-13 19:06:11 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/images/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/images/logo.png" for 127.0.0.1 at 2018-04-13 19:06:24 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/images/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:07:04 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 106ms (Views: 104.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/images/logo.png" for 127.0.0.1 at 2018-04-13 19:07:05 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/images/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:08:13 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 76ms (Views: 74.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/images/logo.png" for 127.0.0.1 at 2018-04-13 19:08:13 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/images/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:08:33 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 75ms (Views: 73.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/images/logo.PNG" for 127.0.0.1 at 2018-04-13 19:08:33 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/images/logo.PNG"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:12:42 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (289.0ms)
+Completed 500 Internal Server Error in 297ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `imgage_tag' for #<#<Class:0x00000003ceba00>:0x007f1c5ac445f0>
+Did you mean?  image_tag):
+    1: <%= imgage_tag("/Logos/logo.png") %>
+    2: <p>Where the punches stop, and the kicks start</p>
+    3: 
+    4: <table>
+  
+app/views/welcome/index.html.erb:1:in `_app_views_welcome_index_html_erb___3210543630679501477_69879879313400'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:12:56 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 144ms (Views: 138.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/Logos/logo.png" for 127.0.0.1 at 2018-04-13 19:12:56 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/Logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/Logos/logo.png" for 127.0.0.1 at 2018-04-13 19:12:57 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/Logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:14:32 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 142ms (Views: 141.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:14:33 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:15:34 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 77ms (Views: 75.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:15:35 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:15:38 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 80ms (Views: 78.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:15:38 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:17:23 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 91ms (Views: 90.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:17:24 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:20:16 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 75ms (Views: 73.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:20:16 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:20:19 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:22:04 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 64ms (Views: 62.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:22:04 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:23:54 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (2.2ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (The asset "images/logos/logo.png" is not present in the asset pipeline.):
+    1: <head><%= image_tag("images/logos/logo.png", width: '150px') %></head>
+    2: <p>Where the punches stop, and the kicks start</p>
+    3: 
+    4: <table>
+  
+app/views/welcome/index.html.erb:1:in `_app_views_welcome_index_html_erb___3210543630679501477_69879877737480'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:24:06 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 90ms (Views: 84.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/images/logos/logo.png" for 127.0.0.1 at 2018-04-13 19:24:06 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/images/logos/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:24:40 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 126ms (Views: 124.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/logo.png" for 127.0.0.1 at 2018-04-13 19:24:40 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/logo.png"):
+  
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.3.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.4) lib/rack/method_override.rb:22:in `call'
+rack (2.0.4) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.3.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.4) lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.3.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.3.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:26:45 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (83.3ms)
+Completed 200 OK in 166ms (Views: 164.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:28:58 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 97ms (Views: 96.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:30:27 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (10.5ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (The asset "logos/logo.png, width: 100px" is not present in the asset pipeline.):
+    1: <head>
+    2:   <h1  align="center">
+    3:   <%= image_tag ("logos/logo.png, width: 100px") %>
+    4:   </h1>
+    5:   <p align="center">Where the punches stop, and the kicks start</p>
+    6: </head>
+  
+app/views/welcome/index.html.erb:3:in `_app_views_welcome_index_html_erb___3210543630679501477_69879877893200'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:30:44 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (12.0ms)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (The asset "logos/logo.png, width: 150px" is not present in the asset pipeline.):
+    1: <head>
+    2:   <h1  align="center">
+    3:   <%= image_tag ("logos/logo.png, width: 150px") %>
+    4:   </h1>
+    5:   <p align="center">Where the punches stop, and the kicks start</p>
+    6: </head>
+  
+app/views/welcome/index.html.erb:3:in `_app_views_welcome_index_html_erb___3210543630679501477_69879876727160'
+Started GET "/" for 127.0.0.1 at 2018-04-13 19:31:19 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 115ms (Views: 108.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 19:32:47 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (61.0ms)
+Completed 200 OK in 159ms (Views: 125.0ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 19:33:20 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 111ms (Views: 108.5ms | ActiveRecord: 0.3ms)
+
+
