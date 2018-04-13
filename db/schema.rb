@@ -10,13 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180412213911) do
+ActiveRecord::Schema.define(version: 20180413042413) do
 
   create_table "categories", force: :cascade do |t|
     t.string "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_categories_on_username", unique: true
+  end
+
+  create_table "project_fundings", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+    t.integer "project_promise_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_fundings_on_project_id"
+    t.index ["project_promise_id"], name: "index_project_fundings_on_project_promise_id"
+    t.index ["user_id"], name: "index_project_fundings_on_user_id"
+  end
+
+  create_table "project_media", force: :cascade do |t|
+    t.integer "project_id"
+    t.string "link"
+    t.integer "link_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_media_on_project_id"
+  end
+
+  create_table "project_promises", force: :cascade do |t|
+    t.integer "project_id"
+    t.text "description"
+    t.integer "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_promises_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "description"
+    t.integer "goal_amount"
+    t.date "finish_date"
+    t.date "delivery_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
