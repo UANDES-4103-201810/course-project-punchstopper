@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
+
   get 'welcome/index'
 
-  resources :categories
-  resources :users
-  root 'welcome#index'
-=======
   resources :project_fundings
   resources :project_promises
   resources :project_media
@@ -24,6 +20,7 @@ Rails.application.routes.draw do
     resources :project_fundings
     resources :project_media
   end
+  root 'welcome#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
->>>>>>> ca76921b1c94d56fd1cec109c2970700540b8c5e
+
 end
