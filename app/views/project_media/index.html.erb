@@ -15,7 +15,7 @@
   <tbody>
     <% @project_media.each do |project_medium| %>
       <tr>
-        <td><%= project_medium.project %></td>
+        <td><%= project_medium.project.title %></td>
         <td><%= project_medium.link %></td>
         <td><%= project_medium.link_type %></td>
         <td><%= link_to 'Show', project_medium %></td>

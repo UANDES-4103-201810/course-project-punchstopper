@@ -2621,3 +2621,1199 @@ Processing by UsersController#index as HTML
 Completed 200 OK in 111ms (Views: 108.5ms | ActiveRecord: 0.3ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:08:48 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (613.0ms)
+Completed 200 OK in 734ms (Views: 725.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:08:59 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 49ms (Views: 40.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:09:02 -0300
+Processing by ProjectsController#index as HTML
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+  
+ArgumentError (You need to supply at least one validation):
+  
+app/models/project.rb:9:in `<class:Project>'
+app/models/project.rb:1:in `<top (required)>'
+app/controllers/projects_controller.rb:7:in `index'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20180412212445)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "name" varchar, "last_name" varchar, "phone" varchar, "address" varchar, "email" varchar, "password" varchar, "last_access" date, "role" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180412212445"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateCategories (20180412213911)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_categories_on_username" ON "categories" ("username")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180412213911"]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjects (20180413033928)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar, "description" text, "goal_amount" integer, "finish_date" date, "delivery_date" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_projects_on_user_id" ON "projects" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413033928"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjectMedia (20180413040127)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "project_media" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "link" varchar, "link_type" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_dd2c56284b"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_media_on_project_id" ON "project_media" ("project_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413040127"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjectPromises (20180413040628)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "project_promises" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "description" text, "cost" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_08734c96e2"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_promises_on_project_id" ON "project_promises" ("project_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413040628"]]
+  [1m[35m (12.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjectFundings (20180413042413)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "project_fundings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "user_id" integer, "project_promise_id" integer, "amount" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_1d06e2ba7a"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+, CONSTRAINT "fk_rails_ab27a3dbf5"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_e156144c7b"
+FOREIGN KEY ("project_promise_id")
+  REFERENCES "project_promises" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_fundings_on_project_id" ON "project_fundings" ("project_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_fundings_on_user_id" ON "project_fundings" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_fundings_on_project_promise_id" ON "project_fundings" ("project_promise_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413042413"]]
+  [1m[35m (12.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-04-13 23:09:38.990530"], ["updated_at", "2018-04-13 23:09:38.990530"]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_categories_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_categories_on_username' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_promise_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_promise_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_media_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_media_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_promises_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_promises_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_projects_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_projects_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_username' AND type='index'
+[0m
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:09:52 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (253.3ms)
+Completed 200 OK in 311ms (Views: 302.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:09:54 -0300
+Processing by ProjectsController#index as HTML
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+  
+ArgumentError (You need to supply at least one validation):
+  
+app/models/project.rb:9:in `<class:Project>'
+app/models/project.rb:1:in `<top (required)>'
+app/controllers/projects_controller.rb:7:in `index'
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:10:16 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 238ms (Views: 236.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:10:34 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 37ms (Views: 32.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:12:26 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (228.3ms)
+Completed 200 OK in 272ms (Views: 263.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:12:28 -0300
+Processing by ProjectsController#index as HTML
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.0ms)
+
+
+  
+ArgumentError (You need to supply at least one validation):
+  
+app/models/project.rb:9:in `<class:Project>'
+app/models/project.rb:1:in `<top (required)>'
+app/controllers/projects_controller.rb:7:in `index'
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:12:35 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 30ms (Views: 28.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:12:38 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 37ms (Views: 35.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:12:39 -0300
+Processing by ProjectsController#index as HTML
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms)
+
+
+  
+ArgumentError (You need to supply at least one validation):
+  
+app/models/project.rb:9:in `<class:Project>'
+app/models/project.rb:1:in `<top (required)>'
+app/controllers/projects_controller.rb:7:in `index'
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:12:40 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 35ms (Views: 33.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:13:12 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (212.5ms)
+Completed 200 OK in 249ms (Views: 242.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:13:14 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 52ms (Views: 32.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:13:39 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (215.7ms)
+Completed 200 OK in 262ms (Views: 245.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:13:42 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 27ms (Views: 26.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:13:43 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 39ms (Views: 34.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:13:46 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 44ms (Views: 42.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:13:53 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 39ms (Views: 37.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2018-04-13 20:13:54 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (43.1ms)
+  Rendered users/new.html.erb within layouts/application (44.8ms)
+Completed 200 OK in 92ms (Views: 73.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:14:06 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"1", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asd", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"1"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.1ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x007f2ff23c1710>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:14:47 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"asdasdasd", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asd", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"1"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x007f2ff17b3b08>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:15:23 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"asdasd", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asd", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x007f2ffc0f4208>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:18:08 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"asdasd", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asd@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x007f2ff0e43be0>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:18:35 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"asdasd", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asd@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x007f2fe8042328>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:19:11 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"asdasd", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asasdd@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x007f2fe8242330>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:20:10 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"dsadasdasd", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asasdd@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x007f2ff1e4b3a8>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:21:33 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4aSq/lnFeHqCOMH7b52P7B9YUNWrMyHBUHBQstcz9C7AuP9AiS3Ei+EWOXZ3HkkLL2IUjIrhdhOoULENhIfXfA==", "user"=>{"username"=>"dsadasdasd", "name"=>"asd", "last_name"=>"asd", "phone"=>"asd", "address"=>"asd", "email"=>"asasdd@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2014", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (2.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "name", "last_name", "phone", "address", "email", "password", "last_access", "role", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["username", "dsadasdasd"], ["name", "asd"], ["last_name", "asd"], ["phone", "asd"], ["address", "asd"], ["email", "asasdd@asd.com"], ["password", "1234"], ["last_access", "2014-04-13"], ["role", "f"], ["created_at", "2018-04-13 23:21:33.844683"], ["updated_at", "2018-04-13 23:21:33.844683"]]
+  [1m[35m (13.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 44ms (ActiveRecord: 16.2ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-04-13 20:21:33 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (198.3ms)
+Completed 200 OK in 256ms (Views: 249.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-04-13 20:21:38 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 41ms (Views: 39.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:21:53 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (194.4ms)
+Completed 200 OK in 235ms (Views: 221.8ms | ActiveRecord: 0.8ms)
+
+
+Started DELETE "/users/1" for 127.0.0.1 at 2018-04-13 20:21:59 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"dHtRfu6WuFECA+0xZiAU9HlTnrIN7eF1q9JteutDW/IT+Z2QM/Yy5s718Q+STYZIqbDiIeLUpxyksF5gyVzkUg==", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[35m (10.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 46ms (ActiveRecord: 12.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:21:59 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 36ms (Views: 34.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2018-04-13 20:22:01 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (14.3ms)
+  Rendered users/new.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 41ms (Views: 39.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:22:39 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ymRk3uev3vlE/upo6ccA2Z9K27FykWVoy2W628hfk1PreDFgN0diCCfQEuXxRMY+r3Cf6FNDMrozRVtkm+uwAQ==", "user"=>{"username"=>"asd", "name"=>"123", "last_name"=>"321", "phone"=>"123", "address"=>"123", "email"=>"123@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2018", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 0.8ms)
+
+
+  
+NoMethodError (undefined method `Username' for #<User:0x00000005530f70>):
+  
+app/controllers/users_controller.rb:30:in `block in create'
+app/controllers/users_controller.rb:29:in `create'
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:23:24 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ymRk3uev3vlE/upo6ccA2Z9K27FykWVoy2W628hfk1PreDFgN0diCCfQEuXxRMY+r3Cf6FNDMrozRVtkm+uwAQ==", "user"=>{"username"=>"asd", "name"=>"123", "last_name"=>"321", "phone"=>"123", "address"=>"123", "email"=>"123@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2018", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "asd"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "123@asd.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (10.9ms)
+  Rendered users/new.html.erb within layouts/application (12.3ms)
+Completed 200 OK in 260ms (Views: 228.0ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-04-13 20:23:29 -0300
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7cOVZKo4QXCbEbeTFJaGuoQkl6C9dgr0ry+81JQGIk+KQVmKd1jLx1fnq63g+xQGVMfrM1JPTJ2gTY/Othmd7w==", "user"=>{"username"=>"asd", "name"=>"123", "last_name"=>"321", "phone"=>"123", "address"=>"123", "email"=>"123@asd.com", "password"=>"[FILTERED]", "last_access(1i)"=>"2018", "last_access(2i)"=>"4", "last_access(3i)"=>"13", "role"=>"0"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "asd"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "123@asd.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("username", "name", "last_name", "phone", "address", "email", "password", "last_access", "role", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["username", "asd"], ["name", "123"], ["last_name", "321"], ["phone", "123"], ["address", "123"], ["email", "123@asd.com"], ["password", "3214"], ["last_access", "2018-04-13"], ["role", "f"], ["created_at", "2018-04-13 23:23:29.049997"], ["updated_at", "2018-04-13 23:23:29.049997"]]
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users/2
+Completed 302 Found in 12ms (ActiveRecord: 4.2ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2018-04-13 20:23:29 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 40ms (Views: 35.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:24:02 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 42ms (Views: 40.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:26:45 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 39ms (Views: 30.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2018-04-13 20:26:47 -0300
+Processing by ProjectsController#new as HTML
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (25.5ms)
+  Rendered projects/new.html.erb within layouts/application (27.2ms)
+Completed 200 OK in 72ms (Views: 53.1ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2018-04-13 20:26:57 -0300
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TbKuNO25BMlaRximm8dC6Oc8lBgSjfVp4+D7SbDfGCjxAg9YZ1Z1v9Ro2iT9DehgGPnG3MDhUBVwyZ8Yn6wEYA==", "project"=>{"user_id"=>"1", "title"=>"asd", "description"=>"asd", "goal_amount"=>"123", "finish_date(1i)"=>"2018", "finish_date(2i)"=>"4", "finish_date(3i)"=>"13", "delivery_date(1i)"=>"2018", "delivery_date(2i)"=>"4", "delivery_date(3i)"=>"13"}, "commit"=>"Create Project"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 0.8ms)
+
+
+  
+NoMethodError (undefined method `creator' for #<Project:0x007f52f2388230>):
+  
+app/controllers/projects_controller.rb:30:in `block in create'
+app/controllers/projects_controller.rb:29:in `create'
+Started POST "/projects" for 127.0.0.1 at 2018-04-13 20:27:35 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TbKuNO25BMlaRximm8dC6Oc8lBgSjfVp4+D7SbDfGCjxAg9YZ1Z1v9Ro2iT9DehgGPnG3MDhUBVwyZ8Yn6wEYA==", "project"=>{"user_id"=>"1", "title"=>"asd", "description"=>"asd", "goal_amount"=>"123", "finish_date(1i)"=>"2018", "finish_date(2i)"=>"4", "finish_date(3i)"=>"13", "delivery_date(1i)"=>"2018", "delivery_date(2i)"=>"4", "delivery_date(3i)"=>"13"}, "commit"=>"Create Project"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (12.0ms)
+  Rendered projects/new.html.erb within layouts/application (14.7ms)
+Completed 200 OK in 266ms (Views: 211.7ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:28:37 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (192.2ms)
+Completed 200 OK in 240ms (Views: 222.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/projects/new" for 127.0.0.1 at 2018-04-13 20:28:38 -0300
+Processing by ProjectsController#new as HTML
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (18.6ms)
+  Rendered projects/new.html.erb within layouts/application (20.2ms)
+Completed 200 OK in 61ms (Views: 45.6ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2018-04-13 20:28:50 -0300
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YTek+YTjJyE2U6F3jqTib4aG616CH3ArNjpkCOosKeHdhwWVDgxWV7h8Y/XobkjneUO5mlBz1VelEwBZxV81qQ==", "project"=>{"user_id"=>"1", "title"=>"asd", "description"=>"123", "goal_amount"=>"123", "finish_date(1i)"=>"2018", "finish_date(2i)"=>"4", "finish_date(3i)"=>"13", "delivery_date(1i)"=>"2018", "delivery_date(2i)"=>"4", "delivery_date(3i)"=>"13"}, "commit"=>"Create Project"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (7.9ms)
+  Rendered projects/new.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 51ms (Views: 33.7ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/projects" for 127.0.0.1 at 2018-04-13 20:32:12 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DwQMv2qb4aT5zC3vEVk0vD0/1oO+sqwftbBA8US+8JJohsBRt/trEzU6MdHlNKYA7dyqEFGL6na60nPrZqFPMg==", "project"=>{"user_id"=>"2", "title"=>"asd", "description"=>"123", "goal_amount"=>"123", "finish_date(1i)"=>"2018", "finish_date(2i)"=>"4", "finish_date(3i)"=>"13", "delivery_date(1i)"=>"2018", "delivery_date(2i)"=>"4", "delivery_date(3i)"=>"13"}, "commit"=>"Create Project"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "projects" ("user_id", "title", "description", "goal_amount", "finish_date", "delivery_date", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 2], ["title", "asd"], ["description", "123"], ["goal_amount", 123], ["finish_date", "2018-04-13"], ["delivery_date", "2018-04-13"], ["created_at", "2018-04-13 23:32:13.122729"], ["updated_at", "2018-04-13 23:32:13.122729"]]
+  [1m[35m (12.5ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/projects/1
+Completed 302 Found in 66ms (ActiveRecord: 15.1ms)
+
+
+Started GET "/projects/1" for 127.0.0.1 at 2018-04-13 20:32:13 -0300
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered projects/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 256ms (Views: 253.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:32:17 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered projects/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 28ms (Views: 26.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/project_media" for 127.0.0.1 at 2018-04-13 20:33:01 -0300
+Processing by ProjectMediaController#index as HTML
+  Rendering project_media/index.html.erb within layouts/application
+  [1m[36mProjectMedium Load (0.1ms)[0m  [1m[34mSELECT "project_media".* FROM "project_media"[0m
+  Rendered project_media/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 33ms (Views: 29.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/project_media/new" for 127.0.0.1 at 2018-04-13 20:33:03 -0300
+Processing by ProjectMediaController#new as HTML
+  Rendering project_media/new.html.erb within layouts/application
+  Rendered project_media/_form.html.erb (12.0ms)
+  Rendered project_media/new.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 49ms (Views: 39.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/project_media" for 127.0.0.1 at 2018-04-13 20:33:11 -0300
+Processing by ProjectMediaController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uPAuoHd7qE137DdcDqEM2eT5cVcjp9MpwSph8aYquhHIEk6umgb2dLyG1IBtmXxX7bHzuMcCzJz+aIEe44IHLw==", "project_medium"=>{"project_id"=>"asd", "link"=>"123", "link_type"=>"2"}, "commit"=>"Create Project medium"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 0], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  Rendering project_media/new.html.erb within layouts/application
+  Rendered project_media/_form.html.erb (2.2ms)
+  Rendered project_media/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 38ms (Views: 27.4ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/project_media" for 127.0.0.1 at 2018-04-13 20:33:14 -0300
+Processing by ProjectMediaController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Or+9YeTdzt7VpX3qsJEADllpz04qzb+9lyzpO/Y7kTxdPXGPOb1EaRlTYdRE/JKyiYqz3cX0+dSYTtoh1CQunA==", "project_medium"=>{"project_id"=>"1", "link"=>"123", "link_type"=>"2"}, "commit"=>"Create Project medium"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "project_media" ("project_id", "link", "link_type", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["project_id", 1], ["link", "123"], ["link_type", 2], ["created_at", "2018-04-13 23:33:14.479034"], ["updated_at", "2018-04-13 23:33:14.479034"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/project_media/1
+Completed 302 Found in 35ms (ActiveRecord: 3.5ms)
+
+
+Started GET "/project_media/1" for 127.0.0.1 at 2018-04-13 20:33:14 -0300
+Processing by ProjectMediaController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProjectMedium Load (0.2ms)[0m  [1m[34mSELECT  "project_media".* FROM "project_media" WHERE "project_media"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering project_media/show.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_media/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 30ms (Views: 27.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/project_media" for 127.0.0.1 at 2018-04-13 20:33:16 -0300
+Processing by ProjectMediaController#index as HTML
+  Rendering project_media/index.html.erb within layouts/application
+  [1m[36mProjectMedium Load (0.2ms)[0m  [1m[34mSELECT "project_media".* FROM "project_media"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_media/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 30ms (Views: 28.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:33:20 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered projects/index.html.erb within layouts/application (19.7ms)
+Completed 200 OK in 45ms (Views: 43.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/projects/1/project_media" for 127.0.0.1 at 2018-04-13 20:33:29 -0300
+Processing by ProjectMediaController#index as HTML
+  Parameters: {"project_id"=>"1"}
+  Rendering project_media/index.html.erb within layouts/application
+  [1m[36mProjectMedium Load (0.2ms)[0m  [1m[34mSELECT "project_media".* FROM "project_media"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_media/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 29ms (Views: 27.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:34:53 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered projects/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 30ms (Views: 29.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:38:43 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered projects/index.html.erb within layouts/application (212.7ms)
+Completed 200 OK in 289ms (Views: 271.3ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/projects/1/project_media" for 127.0.0.1 at 2018-04-13 20:39:42 -0300
+Processing by ProjectMediaController#index as HTML
+  Parameters: {"project_id"=>"1"}
+  Rendering project_media/index.html.erb within layouts/application
+  [1m[36mProjectMedium Load (0.2ms)[0m  [1m[34mSELECT "project_media".* FROM "project_media"[0m
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_media/index.html.erb within layouts/application (20.4ms)
+Completed 200 OK in 77ms (Views: 72.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/project_media" for 127.0.0.1 at 2018-04-13 20:39:59 -0300
+Processing by ProjectMediaController#index as HTML
+  Rendering project_media/index.html.erb within layouts/application
+  [1m[36mProjectMedium Load (0.2ms)[0m  [1m[34mSELECT "project_media".* FROM "project_media"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_media/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 51ms (Views: 49.4ms | ActiveRecord: 0.3ms)
+
+
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUserWishlists (20180413234819)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "user_wishlists" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "project_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_065636f81a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_b118ba3499"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_user_wishlists_on_user_id" ON "user_wishlists" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_user_wishlists_on_project_id" ON "user_wishlists" ("project_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413234819"]]
+  [1m[35m (2.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_categories_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_categories_on_username' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_promise_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_promise_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_media_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_media_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_promises_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_promises_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_projects_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_projects_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_wishlists_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_wishlists_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_username' AND type='index'
+[0m
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:50:40 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (317.0ms)
+Completed 200 OK in 384ms (Views: 376.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/project_wishlists" for 127.0.0.1 at 2018-04-13 20:50:50 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/project_wishlists"):
+  
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/user_wishlists" for 127.0.0.1 at 2018-04-13 20:50:57 -0300
+Processing by UserWishlistsController#index as HTML
+  Rendering user_wishlists/index.html.erb within layouts/application
+  [1m[36mUserWishlist Load (0.2ms)[0m  [1m[34mSELECT "user_wishlists".* FROM "user_wishlists"[0m
+  Rendered user_wishlists/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 63ms (Views: 50.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/user_wishlists/new" for 127.0.0.1 at 2018-04-13 20:51:03 -0300
+Processing by UserWishlistsController#new as HTML
+  Rendering user_wishlists/new.html.erb within layouts/application
+  Rendered user_wishlists/_form.html.erb (7.5ms)
+  Rendered user_wishlists/new.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 69ms (Views: 52.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/user_wishlists" for 127.0.0.1 at 2018-04-13 20:51:05 -0300
+Processing by UserWishlistsController#index as HTML
+  Rendering user_wishlists/index.html.erb within layouts/application
+  [1m[36mUserWishlist Load (0.2ms)[0m  [1m[34mSELECT "user_wishlists".* FROM "user_wishlists"[0m
+  Rendered user_wishlists/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 55ms (Views: 54.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/user_wishlists/new" for 127.0.0.1 at 2018-04-13 20:51:06 -0300
+Processing by UserWishlistsController#new as HTML
+  Rendering user_wishlists/new.html.erb within layouts/application
+  Rendered user_wishlists/_form.html.erb (1.8ms)
+  Rendered user_wishlists/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 54ms (Views: 53.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/user_wishlists" for 127.0.0.1 at 2018-04-13 20:51:10 -0300
+Processing by UserWishlistsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aq+iEVE3BbSmhUZB0+vlyCopTt9FhoRWFk26xjJsc9Sjm6n866NvYhfdpESs/bvE4pNLE/Nqlohf7JZujcxLIw==", "user_wishlist"=>{"user_id"=>"2", "project_id"=>"1"}, "commit"=>"Create User wishlist"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "user_wishlists" ("user_id", "project_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["project_id", 1], ["created_at", "2018-04-13 23:51:11.051937"], ["updated_at", "2018-04-13 23:51:11.051937"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/user_wishlists/1
+Completed 302 Found in 57ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/user_wishlists/1" for 127.0.0.1 at 2018-04-13 20:51:11 -0300
+Processing by UserWishlistsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUserWishlist Load (0.2ms)[0m  [1m[34mSELECT  "user_wishlists".* FROM "user_wishlists" WHERE "user_wishlists"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering user_wishlists/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered user_wishlists/show.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 46ms (Views: 43.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/user_wishlists" for 127.0.0.1 at 2018-04-13 20:51:12 -0300
+Processing by UserWishlistsController#index as HTML
+  Rendering user_wishlists/index.html.erb within layouts/application
+  [1m[36mUserWishlist Load (0.2ms)[0m  [1m[34mSELECT "user_wishlists".* FROM "user_wishlists"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered user_wishlists/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 28ms (Views: 27.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:54:26 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (199.9ms)
+Completed 200 OK in 243ms (Views: 229.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:54:31 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 24ms (Views: 23.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:54:32 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 30ms (Views: 28.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-04-13 20:54:35 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 27ms (Views: 26.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-04-13 20:54:36 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered projects/index.html.erb within layouts/application (23.3ms)
+Completed 200 OK in 75ms (Views: 63.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/project_media" for 127.0.0.1 at 2018-04-13 20:54:45 -0300
+Processing by ProjectMediaController#index as HTML
+  Rendering project_media/index.html.erb within layouts/application
+  [1m[36mProjectMedium Load (0.2ms)[0m  [1m[34mSELECT "project_media".* FROM "project_media"[0m
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_media/index.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 39ms (Views: 35.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/project_promises" for 127.0.0.1 at 2018-04-13 20:54:49 -0300
+Processing by ProjectPromisesController#index as HTML
+  Rendering project_promises/index.html.erb within layouts/application
+  [1m[36mProjectPromise Load (0.2ms)[0m  [1m[34mSELECT "project_promises".* FROM "project_promises"[0m
+  Rendered project_promises/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 32ms (Views: 26.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/project_promises/new" for 127.0.0.1 at 2018-04-13 20:54:51 -0300
+Processing by ProjectPromisesController#new as HTML
+  Rendering project_promises/new.html.erb within layouts/application
+  Rendered project_promises/_form.html.erb (11.3ms)
+  Rendered project_promises/new.html.erb within layouts/application (12.7ms)
+Completed 200 OK in 49ms (Views: 43.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/project_promises" for 127.0.0.1 at 2018-04-13 20:54:54 -0300
+Processing by ProjectPromisesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wovCSVCNQ8qTzHSdo5cywDnR2P1D+GUHWPTKdTm4BlXXW8UJqlKOPP04QkMV2lu6ecwArixT14bCkWqKZmRCOA==", "project_promise"=>{"project_id"=>"1", "description"=>"asd", "cost"=>"123"}, "commit"=>"Create Project promise"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (2.3ms)[0m  [1m[32mINSERT INTO "project_promises" ("project_id", "description", "cost", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["project_id", 1], ["description", "asd"], ["cost", 123], ["created_at", "2018-04-13 23:54:54.827268"], ["updated_at", "2018-04-13 23:54:54.827268"]]
+  [1m[35m (4.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/project_promises/1
+Completed 302 Found in 18ms (ActiveRecord: 6.8ms)
+
+
+Started GET "/project_promises/1" for 127.0.0.1 at 2018-04-13 20:54:54 -0300
+Processing by ProjectPromisesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProjectPromise Load (0.2ms)[0m  [1m[34mSELECT  "project_promises".* FROM "project_promises" WHERE "project_promises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering project_promises/show.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_promises/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 37ms (Views: 28.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/project_promises" for 127.0.0.1 at 2018-04-13 20:54:56 -0300
+Processing by ProjectPromisesController#index as HTML
+  Rendering project_promises/index.html.erb within layouts/application
+  [1m[36mProjectPromise Load (0.2ms)[0m  [1m[34mSELECT "project_promises".* FROM "project_promises"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_promises/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 34ms (Views: 32.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/project_fundings" for 127.0.0.1 at 2018-04-13 20:55:02 -0300
+Processing by ProjectFundingsController#index as HTML
+  Rendering project_fundings/index.html.erb within layouts/application
+  [1m[36mProjectFunding Load (0.2ms)[0m  [1m[34mSELECT "project_fundings".* FROM "project_fundings"[0m
+  Rendered project_fundings/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 33ms (Views: 27.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/project_fundings/new" for 127.0.0.1 at 2018-04-13 20:55:04 -0300
+Processing by ProjectFundingsController#new as HTML
+  Rendering project_fundings/new.html.erb within layouts/application
+  Rendered project_fundings/_form.html.erb (3.1ms)
+  Rendered project_fundings/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 39ms (Views: 30.6ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/project_fundings" for 127.0.0.1 at 2018-04-13 20:55:15 -0300
+Processing by ProjectFundingsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"19WRTTuY/eZ52Nlao+PmdHEHCKq9Auae0ql/b/2MpUjb6h7a8RvDIOa6OZSrj3WrWac0X+1saNwO509X2jMLtA==", "project_funding"=>{"project_id"=>"1", "user_id"=>"2", "project_promise_id"=>"", "amount"=>"123"}, "commit"=>"Create Project funding"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "project_fundings" ("project_id", "user_id", "amount", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["project_id", 1], ["user_id", 2], ["amount", 123], ["created_at", "2018-04-13 23:55:15.074120"], ["updated_at", "2018-04-13 23:55:15.074120"]]
+  [1m[35m (4.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/project_fundings/1
+Completed 302 Found in 18ms (ActiveRecord: 5.7ms)
+
+
+Started GET "/project_fundings/1" for 127.0.0.1 at 2018-04-13 20:55:15 -0300
+Processing by ProjectFundingsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProjectFunding Load (0.2ms)[0m  [1m[34mSELECT  "project_fundings".* FROM "project_fundings" WHERE "project_fundings"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering project_fundings/show.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered project_fundings/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 29ms (Views: 26.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/project_fundings" for 127.0.0.1 at 2018-04-13 20:55:16 -0300
+Processing by ProjectFundingsController#index as HTML
+  Rendering project_fundings/index.html.erb within layouts/application
+  [1m[36mProjectFunding Load (0.2ms)[0m  [1m[34mSELECT "project_fundings".* FROM "project_fundings"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered project_fundings/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 34ms (Views: 32.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/project_fundings/new" for 127.0.0.1 at 2018-04-13 20:55:18 -0300
+Processing by ProjectFundingsController#new as HTML
+  Rendering project_fundings/new.html.erb within layouts/application
+  Rendered project_fundings/_form.html.erb (4.3ms)
+  Rendered project_fundings/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 40ms (Views: 38.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/project_fundings" for 127.0.0.1 at 2018-04-13 20:55:22 -0300
+Processing by ProjectFundingsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"emtq4ZlJFpbT5N1Hdl/+MuWLuHe5+pSYYPbGJ7KAft92VOV2U8ooUEyGPYl+M23tzSuEgumUGtq8uPYflT/QIw==", "project_funding"=>{"project_id"=>"1", "user_id"=>"2", "project_promise_id"=>"1", "amount"=>"321"}, "commit"=>"Create Project funding"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "project_fundings" ("project_id", "user_id", "project_promise_id", "amount", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["project_id", 1], ["user_id", 2], ["project_promise_id", 1], ["amount", 321], ["created_at", "2018-04-13 23:55:22.871778"], ["updated_at", "2018-04-13 23:55:22.871778"]]
+  [1m[35m (3.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/project_fundings/2
+Completed 302 Found in 11ms (ActiveRecord: 4.0ms)
+
+
+Started GET "/project_fundings/2" for 127.0.0.1 at 2018-04-13 20:55:22 -0300
+Processing by ProjectFundingsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mProjectFunding Load (0.1ms)[0m  [1m[34mSELECT  "project_fundings".* FROM "project_fundings" WHERE "project_fundings"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering project_fundings/show.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProjectPromise Load (0.1ms)[0m  [1m[34mSELECT  "project_promises".* FROM "project_promises" WHERE "project_promises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_fundings/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 33ms (Views: 31.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/project_fundings" for 127.0.0.1 at 2018-04-13 20:55:24 -0300
+Processing by ProjectFundingsController#index as HTML
+  Rendering project_fundings/index.html.erb within layouts/application
+  [1m[36mProjectFunding Load (0.2ms)[0m  [1m[34mSELECT "project_fundings".* FROM "project_fundings"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Project Load (0.0ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (1.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProjectPromise Load (0.1ms)[0m  [1m[34mSELECT  "project_promises".* FROM "project_promises" WHERE "project_promises"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered project_fundings/index.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 42ms (Views: 39.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/project_fundings/new" for 127.0.0.1 at 2018-04-13 20:55:45 -0300
+Processing by ProjectFundingsController#new as HTML
+  Rendering project_fundings/new.html.erb within layouts/application
+  Rendered project_fundings/_form.html.erb (3.0ms)
+  Rendered project_fundings/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 35ms (Views: 34.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-04-13 20:55:51 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 39ms (Views: 38.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/user_wishlists" for 127.0.0.1 at 2018-04-13 20:55:54 -0300
+Processing by UserWishlistsController#index as HTML
+  Rendering user_wishlists/index.html.erb within layouts/application
+  [1m[36mUserWishlist Load (0.2ms)[0m  [1m[34mSELECT "user_wishlists".* FROM "user_wishlists"[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered user_wishlists/index.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 65ms (Views: 54.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/user_wishlists/new" for 127.0.0.1 at 2018-04-13 20:55:56 -0300
+Processing by UserWishlistsController#new as HTML
+  Rendering user_wishlists/new.html.erb within layouts/application
+  Rendered user_wishlists/_form.html.erb (1.9ms)
+  Rendered user_wishlists/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 26ms (Views: 25.0ms | ActiveRecord: 0.0ms)
+
+

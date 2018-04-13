@@ -16,8 +16,8 @@
   <tbody>
     <% @project_fundings.each do |project_funding| %>
       <tr>
-        <td><%= project_funding.project %></td>
-        <td><%= project_funding.user %></td>
+        <td><%= project_funding.project.title %></td>
+        <td><%= project_funding.user.username %></td>
         <td><%= project_funding.project_promise %></td>
         <td><%= project_funding.amount %></td>
         <td><%= link_to 'Show', project_funding %></td>

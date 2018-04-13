@@ -15,7 +15,7 @@
   <tbody>
     <% @project_promises.each do |project_promise| %>
       <tr>
-        <td><%= project_promise.project %></td>
+        <td><%= project_promise.project.title %></td>
         <td><%= project_promise.description %></td>
         <td><%= project_promise.cost %></td>
         <td><%= link_to 'Show', project_promise %></td>

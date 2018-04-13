@@ -12,7 +12,7 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Creator</th>
       <th>Title</th>
       <th>Description</th>
       <th>Goal amount</th>
@@ -25,7 +25,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.user %></td>
+        <td><%= project.user.username %></td>
         <td><%= project.title %></td>
         <td><%= project.description %></td>
         <td><%= project.goal_amount %></td>
