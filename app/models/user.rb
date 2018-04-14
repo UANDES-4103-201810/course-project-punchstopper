@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-
-  has_many :projects, dependent: :destroy
   has_many :user_wishlists, dependent: :destroy
+  has_many :projects, dependent: :destroy
+  has_many :project_fundings, dependent: :destroy
 
   validates :username, :email, :password, presence: true
   validates :username, :email, uniqueness: true

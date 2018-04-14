@@ -1,8 +1,8 @@
 class Project < ApplicationRecord
   belongs_to :user
   has_many :project_medium, dependent: :destroy
-  has_many :project_promises, dependent: :destroy
   has_many :project_fundings, dependent: :destroy
+  has_many :project_promises, dependent: :destroy
   has_many :user_wishlists, dependent: :destroy
 
   validates :user,:title,:goal_amount,:finish_date,:delivery_date, presence: true
