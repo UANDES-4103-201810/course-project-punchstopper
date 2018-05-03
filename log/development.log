@@ -13854,3 +13854,1792 @@ FOREIGN KEY ("project_id")
             FROM sqlite_temp_master
             WHERE name='index_users_on_username' AND type='index'
 [0m
+Started GET "/" for 127.0.0.1 at 2018-05-02 19:38:37 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (289.8ms)
+Completed 200 OK in 343ms (Views: 335.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 19:38:40 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 42ms (Views: 32.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/projects" for 127.0.0.1 at 2018-05-02 19:38:47 -0300
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 49ms (Views: 34.8ms | ActiveRecord: 0.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateCategories (20180412213911)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_categories_on_username" ON "categories" ("username")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180412213911"]]
+  [1m[35m (2.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjects (20180413033928)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar, "description" text, "goal_amount" integer, "finish_date" date, "delivery_date" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_projects_on_user_id" ON "projects" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413033928"]]
+  [1m[35m (6.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjectMedia (20180413040127)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "project_media" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "link" varchar, "link_type" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_dd2c56284b"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_project_media_on_project_id" ON "project_media" ("project_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413040127"]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjectPromises (20180413040628)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "project_promises" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "description" text, "cost" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_08734c96e2"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_promises_on_project_id" ON "project_promises" ("project_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413040628"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateProjectFundings (20180413042413)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "project_fundings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "project_id" integer, "user_id" integer, "project_promise_id" integer, "amount" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_1d06e2ba7a"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+, CONSTRAINT "fk_rails_ab27a3dbf5"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_e156144c7b"
+FOREIGN KEY ("project_promise_id")
+  REFERENCES "project_promises" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_fundings_on_project_id" ON "project_fundings" ("project_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_fundings_on_user_id" ON "project_fundings" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_project_fundings_on_project_promise_id" ON "project_fundings" ("project_promise_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413042413"]]
+  [1m[35m (2.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUserWishlists (20180413234819)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "user_wishlists" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "project_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_065636f81a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_b118ba3499"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_user_wishlists_on_user_id" ON "user_wishlists" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_user_wishlists_on_project_id" ON "user_wishlists" ("project_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180413234819"]]
+  [1m[35m (3.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to DeviseCreateUsers (20180502230407)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "name" varchar, "last_name" varchar, "phone" varchar, "address" varchar, "role" boolean, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_username' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_username' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180502230407"]]
+  [1m[35m (9.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-05-02 23:08:43.045035"], ["updated_at", "2018-05-02 23:08:43.045035"]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_categories_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_categories_on_username' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_promise_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_promise_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_fundings_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_media_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_media_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_project_promises_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_project_promises_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_projects_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_projects_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_wishlists_on_project_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_wishlists_on_project_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_user_wishlists_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_username' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_username' AND type='index'
+[0m
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:09:11 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (290.7ms)
+Completed 200 OK in 367ms (Views: 360.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:09:13 -0300
+  
+ActionController::RoutingError (uninitialized constant UsersController):
+  
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `const_get'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `block in constantize'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `each'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `inject'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `constantize'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:78:in `controller_class'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:43:in `controller'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:29:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:09:23 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 42ms (Views: 41.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:09:50 -0300
+  
+ActionController::RoutingError (uninitialized constant UsersController):
+  
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `const_get'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `block in constantize'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `each'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `inject'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `constantize'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:78:in `controller_class'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:43:in `controller'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:29:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:10:34 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 68ms (Views: 45.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:10:40 -0300
+  
+ActionController::RoutingError (uninitialized constant UsersController):
+  
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `const_get'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `block in constantize'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `each'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `inject'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `constantize'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:78:in `controller_class'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:43:in `controller'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:29:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:11:40 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 36ms (Views: 35.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:11:58 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1kJPdP/jfFF/9zX6F3dsFRVzdgmVs2Cbvg8nbNYMRSHPTJ0PEaFqMvHH0aIgaRJyWi5xQbunDKmcS7jd8EQDHw==", "user"=>{"email"=>"nhurtado@miuandes.cl", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "nhurtado@miuandes.cl"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "nhurtado@miuandes.cl"], ["encrypted_password", "$2a$11$2L12MY/0CmK0ZQpBtEZ7Ruj7yvnJ9eSz8nzINpVz2FdFSvnHzD/o2"], ["created_at", "2018-05-02 23:11:58.413539"], ["updated_at", "2018-05-02 23:11:58.413539"]]
+  [1m[35m (3.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-05-02 23:11:58.421062"], ["last_sign_in_at", "2018-05-02 23:11:58.421062"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-05-02 23:11:58.421584"], ["id", 1]]
+  [1m[35m (3.5ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 160ms (ActiveRecord: 9.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:11:58 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 29ms (Views: 28.2ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:22:35 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (191.9ms)
+Completed 200 OK in 231ms (Views: 224.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:22:36 -0300
+  
+ActionController::RoutingError (uninitialized constant UsersController):
+  
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `const_get'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:269:in `block in constantize'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `each'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `inject'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/inflector/methods.rb:267:in `constantize'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/http/request.rb:78:in `controller_class'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:43:in `controller'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:29:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:22:40 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 29ms (Views: 28.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:25:17 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 34ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:25:17 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (180.9ms)
+Completed 200 OK in 211ms (Views: 210.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:25:37 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (7.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (17.0ms)
+Completed 200 OK in 46ms (Views: 42.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:25:49 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/i54aWx+1zDaGdMDxZIjFLzuffD5KSxEwRy62xqACSVLhXcMjhOoyKYg653nyslcnJqY9H8+8R19x/GTbNQtaQ==", "user"=>{"email"=>"asd@asd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@asd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@asd.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 167ms (Views: 26.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:28:26 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+Completed 406 Not Acceptable in 27ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (UsersController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/implicit_render.rb:53:in `default_render'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:186:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rendering.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:131:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:19:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rescue.rb:20:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `block in instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:124:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionview-5.1.6/lib/action_view/rendering.rb:30:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:189:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:253:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:31:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:28:39 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/registrations/new.html.erb within layouts/application (339.2ms)
+Completed 500 Internal Server Error in 377ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `username_field' for #<ActionView::Helpers::FormBuilder:0x0000000323d680>):
+     5: 
+     6:   <div class="field">
+     7:     <%= f.label :username %><br />
+     8:     <%= f.username_field :username, autofocus: true, autocomplete: "off" %>
+     9:   </div>
+    10: 
+    11:   <div class="field">
+  
+app/views/devise/registrations/new.html.erb:8:in `block in _app_views_devise_registrations_new_html_erb__328891107616276223_30924040'
+app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb__328891107616276223_30924040'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:34:45 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 256ms (Views: 255.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:35:03 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/registrations/new.html.erb within layouts/application (355.9ms)
+Completed 500 Internal Server Error in 359ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `field' for #<ActionView::Helpers::FormBuilder:0x007f7fa003aaf8>):
+     5: 
+     6:   <div class="field">
+     7:     <%= f.label :username %><br />
+     8:     <%= f.field :email, autofocus: true, autocomplete: "email" %>
+     9:   </div>
+    10: 
+    11:   <div class="field">
+  
+app/views/devise/registrations/new.html.erb:8:in `block in _app_views_devise_registrations_new_html_erb__328891107616276223_70093061019540'
+app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb__328891107616276223_70093061019540'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:36:40 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 41ms (Views: 40.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:37:18 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 28ms (Views: 27.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:37:45 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6Rd/jdAgW4SEKjRnHx2hv7gt3N7LxTlgJ831GzZUVWJcvHDoMk0kfPgTDPk9RUv3mFk52k3S5DmbFr5TQABxLg==", "user"=>{"username"=>"asdd@asd.c", "email"=>"asd@aasd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+Unpermitted parameter: :username
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 164ms (Views: 28.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:40:16 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+Completed 406 Not Acceptable in 29ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (UsersController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/implicit_render.rb:53:in `default_render'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:186:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rendering.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:131:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:19:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rescue.rb:20:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `block in instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:124:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionview-5.1.6/lib/action_view/rendering.rb:30:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:189:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:253:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:31:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:40:37 -0300
+Processing by Devise::RegistrationsController#new as HTML
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `for' for #<Devise::ParameterSanitizer:0x00000005f8fac0>):
+  
+app/controllers/application_controller.rb:8:in `configure_permitted_parameters'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:41:43 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (19.2ms)
+Completed 200 OK in 272ms (Views: 250.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:42:06 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/registrations/new.html.erb within layouts/application (389.5ms)
+Completed 500 Internal Server Error in 393ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `username_field' for #<ActionView::Helpers::FormBuilder:0x007f797d9c2ce8>):
+     5: 
+     6:   <div class="field">
+     7:     <%= f.label :username %><br />
+     8:     <%= f.username_field :username, autofocus: true, autocomplete: "email" %>
+     9:   </div>
+    10: 
+    11:   <div class="field">
+  
+app/views/devise/registrations/new.html.erb:8:in `block in _app_views_devise_registrations_new_html_erb__3187614234635970226_70079888022100'
+app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb__3187614234635970226_70079888022100'
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:42:35 -0300
+Processing by UsersController#index as HTML
+Completed 406 Not Acceptable in 24ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (UsersController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/implicit_render.rb:53:in `default_render'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:186:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rendering.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:131:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:19:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rescue.rb:20:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `block in instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:124:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionview-5.1.6/lib/action_view/rendering.rb:30:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:189:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:253:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:31:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:43:10 -0300
+  [1m[35m (5.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/registrations/new.html.erb within layouts/application (352.2ms)
+Completed 500 Internal Server Error in 385ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `username_field' for #<ActionView::Helpers::FormBuilder:0x000000051f3060>):
+     5: 
+     6:   <div class="field">
+     7:     <%= f.label :username %><br />
+     8:     <%= f.username_field :username, autofocus: true, autocomplete: "email" %>
+     9:   </div>
+    10: 
+    11:   <div class="field">
+  
+app/views/devise/registrations/new.html.erb:8:in `block in _app_views_devise_registrations_new_html_erb__2897531162125905555_43160600'
+app/views/devise/registrations/new.html.erb:3:in `_app_views_devise_registrations_new_html_erb__2897531162125905555_43160600'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:43:19 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.4ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 222ms (Views: 220.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:43:33 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ICPkwAeHGNKNtC3TXe1dl4n24GlJqgN4Z2E42LN5FAKViOul5epnKvGNFU1/tbffqYIFbc+93iHbunOQxS0wTg==", "user"=>{"username"=>"asd@asd.c", "email"=>"asd@asd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (1.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@asd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "asd@asd.c"], ["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@asd.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "asd@asd.c"], ["email", "asd@asd.com"], ["encrypted_password", "$2a$11$dNVPE/eJRAUfWA2/yq5N3.eIiMtkz3CAopnnN4Exa1CooUgdG3kva"], ["created_at", "2018-05-02 23:43:33.693941"], ["updated_at", "2018-05-02 23:43:33.693941"]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-05-02 23:43:33.700740"], ["last_sign_in_at", "2018-05-02 23:43:33.700740"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-05-02 23:43:33.703261"], ["id", 2]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 172ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:43:33 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 47ms (Views: 45.6ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:45:45 -0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 36ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:45:45 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (199.6ms)
+Completed 200 OK in 233ms (Views: 231.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:45:56 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:45:56 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 35ms (Views: 34.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:46:08 -0300
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 36ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:46:08 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (204.6ms)
+Completed 200 OK in 236ms (Views: 235.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:46:19 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 25ms (Views: 23.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:46:22 -0300
+Processing by UsersController#index as HTML
+Completed 406 Not Acceptable in 23ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (UsersController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/implicit_render.rb:53:in `default_render'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:186:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rendering.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:131:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:19:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rescue.rb:20:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `block in instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:124:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionview-5.1.6/lib/action_view/rendering.rb:30:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:189:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:253:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:31:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:46:24 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 56ms (Views: 47.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:46:38 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dHTWDopTiYa9oOKpwnn3rbZOVeAuWQG5e4cXrELBzHJMFCzUnbKUUAIDQvx2MC6R7nGouyPQroNaic7X07/lFw==", "user"=>{"username"=>"a", "email"=>"asd3@asd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd3@asd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "a"], ["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd3@asd.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "a"], ["email", "asd3@asd.com"], ["encrypted_password", "$2a$11$I2hde1Prn0YFg9blr57g3e7IrBw980CQtoasSPYXSTnziSx2efR3a"], ["created_at", "2018-05-02 23:46:38.220229"], ["updated_at", "2018-05-02 23:46:38.220229"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-05-02 23:46:38.225189"], ["last_sign_in_at", "2018-05-02 23:46:38.225189"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-05-02 23:46:38.226332"], ["id", 3]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 152ms (ActiveRecord: 5.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:46:38 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 28ms (Views: 27.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:47:33 -0300
+Processing by UsersController#index as HTML
+Completed 406 Not Acceptable in 23ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (UsersController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/implicit_render.rb:53:in `default_render'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:186:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rendering.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:131:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/callbacks.rb:19:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/rescue.rb:20:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `block in instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/notifications.rb:166:in `instrument'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/abstract_controller/base.rb:124:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionview-5.1.6/lib/action_view/rendering.rb:30:in `process'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:189:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_controller/metal.rb:253:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:31:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:50:in `block in serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `each'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/journey/router.rb:33:in `serve'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/routing/route_set.rb:844:in `call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:36:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `catch'
+vendor/bundle/ruby/2.4.0/gems/warden-1.2.7/lib/warden/manager.rb:35:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/etag.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/conditional_get.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/head.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:232:in `context'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/session/abstract/id.rb:226:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/cookies.rb:613:in `call'
+vendor/bundle/ruby/2.4.0/gems/activerecord-5.1.6/lib/active_record/migration.rb:556:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/callbacks.rb:97:in `run_callbacks'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:47:37 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 26ms (Views: 25.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:48:09 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.5ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionView::Template::Error (undefined method `last_access' for #<User:0x007f882985a1c0>):
+    36:         <td><%= user.address %></td>
+    37:         <td><%= user.email %></td>
+    38:         <td><%= user.password %></td>
+    39:         <td><%= user.last_access %></td>
+    40:         <td><%= user.role %></td>
+    41:         <td><%= link_to 'Show', user %></td>
+    42:         <td><%= link_to 'Edit', edit_user_path(user) %></td>
+  
+app/views/users/index.html.erb:39:in `block in _app_views_users_index_html_erb__1542565746017414724_70111394618960'
+app/views/users/index.html.erb:30:in `_app_views_users_index_html_erb__1542565746017414724_70111394618960'
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:48:36 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 36ms (Views: 34.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/1/edit" for 127.0.0.1 at 2018-05-02 20:48:45 -0300
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_form.html.erb (8.8ms)
+  Rendered users/edit.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 45ms (Views: 42.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2018-05-02 20:49:15 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (5.7ms)
+  Rendered users/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 33ms (Views: 32.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:49:49 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 31ms (Views: 29.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2018-05-02 20:49:52 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (2.9ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.1ms)
+
+
+  
+ActionView::Template::Error (undefined method `last_access' for #<User:0x007f8829297990>):
+    45: 
+    46: <p>
+    47:   <strong>Last access:</strong>
+    48:   <%= @user.last_access %>
+    49: </p>
+    50: 
+    51: <p>
+  
+app/views/users/show.html.erb:48:in `_app_views_users_show_html_erb___2569571967897987271_70111391425580'
+Started GET "/users/2" for 127.0.0.1 at 2018-05-02 20:51:24 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 26ms (Views: 24.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2018-05-02 20:52:01 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 46ms (Views: 42.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:53:22 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 37ms (Views: 35.3ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/users/2" for 127.0.0.1 at 2018-05-02 20:53:29 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ilcnwyhrSI6fe9VML/mX/1ycUoeceDi/fL3+my3raIqTWfW4xile7RFLMRQY5+mYE8FVz7JsVI1e+WEqC6MutA==", "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUserWishlist Load (0.1ms)[0m  [1m[34mSELECT "user_wishlists".* FROM "user_wishlists" WHERE "user_wishlists"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mProjectFunding Load (0.1ms)[0m  [1m[34mSELECT "project_fundings".* FROM "project_fundings" WHERE "project_fundings"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  [1m[35m (3.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 49ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:53:29 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 46ms (Views: 44.2ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/users/1" for 127.0.0.1 at 2018-05-02 20:53:57 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"yt3PUyg2vNmkHukNIBBwChO7TmonrQG3Hu71BawbGCnT0x0oxnSquiouDVUXDg5tXOZJIgm5bYU8qmq0ilNeFw==", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUserWishlist Load (0.1ms)[0m  [1m[34mSELECT "user_wishlists".* FROM "user_wishlists" WHERE "user_wishlists"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mProject Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mProjectFunding Load (0.0ms)[0m  [1m[34mSELECT "project_fundings".* FROM "project_fundings" WHERE "project_fundings"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mSQL (4.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[35m (3.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 23ms (ActiveRecord: 8.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:53:57 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 39ms (Views: 37.4ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/users/3" for 127.0.0.1 at 2018-05-02 20:54:00 -0300
+Processing by UsersController#destroy as HTML
+  Parameters: {"authenticity_token"=>"SVEs4mAWbkcjXjVnMHZE0CZfM/zEERUT3g4sZZ+MGXBQX/6ZjlR4JK1u0T8HaDq3aQI0tOoFeSH8SrPUucRfTg==", "id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUserWishlist Load (0.1ms)[0m  [1m[34mSELECT "user_wishlists".* FROM "user_wishlists" WHERE "user_wishlists"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[36mProject Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[36mProjectFunding Load (0.1ms)[0m  [1m[34mSELECT "project_fundings".* FROM "project_fundings" WHERE "project_fundings"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[35mSQL (1.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  [1m[35m (4.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users
+Completed 302 Found in 14ms (ActiveRecord: 5.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:54:00 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 33ms (Views: 31.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2018-05-02 20:54:05 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.2ms)
+  Rendered users/new.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 29ms (Views: 28.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2018-05-02 20:54:12 -0300
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.9ms)
+  Rendered users/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 40ms (Views: 38.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:54:16 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 41ms (Views: 38.5ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:54:23 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1t9KAouvbxdVun2smrzAIpZFJseMhDvTt4KfpMef3M7P0Zh5Ze15dNuKmfStor5F2Rghj6KQV+GVxgAV4dea8A==", "user"=>{"username"=>"", "email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", ""], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", ""], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 162ms (Views: 32.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:54:35 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rCfhpa0wgere2G7jjfaDbVJIAYqs2WZj2NH6T+fWvLy1KTPeQ3KXiVDoiru66P0KHRUGwoLNClH6lWX+wZ76gg==", "user"=>{"username"=>"a", "email"=>"asd@asd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@asd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "a"], ["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@asd.com"], ["LIMIT", 1]]
+  [1m[35mSQL (1.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "a"], ["email", "asd@asd.com"], ["encrypted_password", "$2a$11$U.0oBL/vtWIARi6LYk5JO.nUL7.L1tfvbPVa6AN73VnRwc54g/3ja"], ["created_at", "2018-05-02 23:54:35.785183"], ["updated_at", "2018-05-02 23:54:35.785183"]]
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-05-02 23:54:35.790708"], ["last_sign_in_at", "2018-05-02 23:54:35.790708"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-05-02 23:54:35.791499"], ["id", 4]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 145ms (ActiveRecord: 6.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:54:35 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 34ms (Views: 33.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:54:39 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 32ms (Views: 30.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:55:36 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 25ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:55:37 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 67ms (Views: 65.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2018-05-02 20:55:47 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/sign_in"):
+  
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:137:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:30:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `catch'
+vendor/bundle/ruby/2.4.0/gems/web-console-3.6.0/lib/web_console/middleware.rb:20:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:36:in `call_app'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `block in call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `block in tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:26:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/tagged_logging.rb:69:in `tagged'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/rack/logger.rb:24:in `call'
+vendor/bundle/ruby/2.4.0/gems/sprockets-rails-3.2.1/lib/sprockets/rails/quiet_assets.rb:13:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/request_id.rb:25:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/method_override.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/runtime.rb:22:in `call'
+vendor/bundle/ruby/2.4.0/gems/activesupport-5.1.6/lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/executor.rb:12:in `call'
+vendor/bundle/ruby/2.4.0/gems/actionpack-5.1.6/lib/action_dispatch/middleware/static.rb:125:in `call'
+vendor/bundle/ruby/2.4.0/gems/rack-2.0.4/lib/rack/sendfile.rb:111:in `call'
+vendor/bundle/ruby/2.4.0/gems/railties-5.1.6/lib/rails/engine.rb:522:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/configuration.rb:225:in `call'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:632:in `handle_request'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:446:in `process_client'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/server.rb:306:in `block in run'
+vendor/bundle/ruby/2.4.0/gems/puma-3.11.4/lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:55:54 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 45ms (Views: 44.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:55:57 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 35ms (Views: 32.6ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:56:06 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"BYPl4qOu9KbUHLY0pH4R5vNYgDpkxwYxKrKYEQlKmKQ94x84tE/pcGu/FmEQN8jaq2d9YWlOqQsLvEFqmDSxwQ==", "user"=>{"username"=>"asd", "email"=>"asd@aasd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+Unpermitted parameter: :username
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 166ms (Views: 36.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:56:15 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ro67P/1JNt+794nsiLqOp6ClkzH0ijVjpX6mWbmo1gl+7kHl6qgrCQRUKbk881eb+JpuavkDmlmEcH8iKNb/bA==", "user"=>{"username"=>"asdasd", "email"=>"asd@aasd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+Unpermitted parameter: :username
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 167ms (Views: 29.7ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 20:56:27 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zHo7b55i/Zl5cKddpi3FtDc6NoqU6WW67Gxy6pHQskX0GsG1iYPgT8bTBwgSZByIbwXL0ZlgyoDNYquRAK6bIA==", "user"=>{"username"=>"asd", "email"=>"asd@aasd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "asd"], ["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "asd"], ["email", "asd@aasd.com"], ["encrypted_password", "$2a$11$k1cdX/BaM6inWwDo7wwt1u29ecqhWUUHUMYLIXRHmhmW6fbAH.3E."], ["created_at", "2018-05-02 23:56:27.493976"], ["updated_at", "2018-05-02 23:56:27.493976"]]
+  [1m[35m (7.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-05-02 23:56:27.505325"], ["last_sign_in_at", "2018-05-02 23:56:27.505325"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-05-02 23:56:27.506042"], ["id", 5]]
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 170ms (ActiveRecord: 11.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:56:27 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 27ms (Views: 26.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:57:18 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 31ms (Views: 29.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/4/edit" for 127.0.0.1 at 2018-05-02 20:57:21 -0300
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.2ms)
+  Rendered users/edit.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 34ms (Views: 31.4ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/users/4" for 127.0.0.1 at 2018-05-02 20:57:32 -0300
+Processing by UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"E3MxV3TghIPztyGul25V+4Kfb4SBtTxCsDDBvAByusH23JFYeuogF8ZwwwQsJrpwaoGHdPAds/YlOmDmTxlQNw==", "user"=>{"username"=>"a", "name"=>"asd2", "last_name"=>"asd", "phone"=>"aasd", "address"=>"asd", "email"=>"asd@asd.com", "password"=>"[FILTERED]", "role"=>"1"}, "commit"=>"Update User", "id"=>"4"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["username", "a"], ["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "asd@asd.com"], ["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  Rendering users/edit.html.erb within layouts/application
+  Rendered users/_form.html.erb (4.4ms)
+  Rendered users/edit.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 172ms (Views: 31.3ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/users/4" for 127.0.0.1 at 2018-05-02 20:57:36 -0300
+Processing by UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uRMQU8b1SNvltrHf7WKX1TxhiglHMM/TjztfXunldnqgHcIoKLdeuGuGVYfafOmyczyNQWkko+Gtf8Dvz60wRA==", "user"=>{"username"=>"a", "name"=>"asd2", "last_name"=>"asd", "phone"=>"aasd", "address"=>"asd", "email"=>"asd@asd.com", "password"=>"[FILTERED]", "role"=>"1"}, "commit"=>"Update User", "id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["username", "a"], ["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? AND ("users"."id" != ?) LIMIT ?[0m  [["email", "asd@asd.com"], ["id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[33mUPDATE "users" SET "name" = ?, "last_name" = ?, "phone" = ?, "address" = ?, "encrypted_password" = ?, "role" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["name", "asd2"], ["last_name", "asd"], ["phone", "aasd"], ["address", "asd"], ["encrypted_password", "$2a$11$leFQ3U5aRH722gBSjoqYj.xxqCk3OFBXxrdjN6zntRFwuYTARM24."], ["role", "t"], ["updated_at", "2018-05-02 23:57:37.112998"], ["id", 4]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/users/4
+Completed 302 Found in 137ms (ActiveRecord: 3.6ms)
+
+
+Started GET "/users/4" for 127.0.0.1 at 2018-05-02 20:57:37 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 32ms (Views: 30.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 20:57:39 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 28ms (Views: 27.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 20:58:51 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 39ms (Views: 37.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-05-02 20:58:56 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 49ms (Views: 47.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2018-05-02 20:59:41 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UNsgmWxCktr9Rxp0V3CBw0hK12A9nKkG7E8KZOLFXGZJ1fLiggCEuXN3/ixgbv+kBxfQKBOIxTTOC5XVxI0aWA==", "user"=>{"email"=>"asd@aasd.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "asd@aasd.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", "2018-05-02 23:59:41.702732"], ["sign_in_count", 2], ["updated_at", "2018-05-02 23:59:41.703557"], ["id", 5]]
+  [1m[35m (9.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 143ms (ActiveRecord: 10.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:59:41 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 28ms (Views: 27.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2018-05-02 20:59:49 -0300
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 20:59:49 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 29ms (Views: 28.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 21:00:58 -0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (195.3ms)
+Completed 200 OK in 232ms (Views: 222.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 21:01:02 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (27.9ms)
+Completed 200 OK in 52ms (Views: 50.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2018-05-02 21:01:06 -0300
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.6ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 53ms (Views: 48.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-05-02 21:01:15 -0300
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"e4KgtP9PHzjKF4agZ//6RZPNxYChGuTasF/wNjSu3wHOEK7M3eWwnKoGioFMWTZ2o3nG4FOcCdh6ig5hg2aXxA==", "user"=>{"username"=>"dsa", "email"=>"dsa@gasd.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dsa@gasd.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "dsa"], ["LIMIT", 1]]
+  [1m[36mCACHE User Exists (0.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dsa@gasd.com"], ["LIMIT", 1]]
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "dsa"], ["email", "dsa@gasd.com"], ["encrypted_password", "$2a$11$nNKUC1cM.8XUdUg5pGWFs.YDCsrWBMRCyNClcaq89CyTZEqQU670K"], ["created_at", "2018-05-03 00:01:16.128634"], ["updated_at", "2018-05-03 00:01:16.128634"]]
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "users" SET "sign_in_count" = ?, "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["sign_in_count", 1], ["current_sign_in_at", "2018-05-03 00:01:16.135834"], ["last_sign_in_at", "2018-05-03 00:01:16.135834"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["updated_at", "2018-05-03 00:01:16.137107"], ["id", 6]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 159ms (ActiveRecord: 7.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-02 21:01:16 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 26ms (Views: 24.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-05-02 21:01:25 -0300
+Processing by UsersController#index as HTML
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 38ms (Views: 36.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/6" for 127.0.0.1 at 2018-05-02 21:01:30 -0300
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 31ms (Views: 28.0ms | ActiveRecord: 0.3ms)
+
+

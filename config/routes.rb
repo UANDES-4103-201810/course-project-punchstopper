@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :user_wishlists
   get 'welcome/index'
 
@@ -8,7 +9,6 @@ Rails.application.routes.draw do
   resources :project_media
   resources :projects
   resources :categories
-  resources :users
   resources :users do
     resources :projects do
       resources :project_promises
