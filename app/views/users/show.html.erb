@@ -31,18 +31,12 @@
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <%= @user.encrypted_password %>
-</p>
-
-<p>
-  <strong>Last access:</strong>
-  <%= @user.last_sign_in_at %>
-</p>
-
-<p>
   <strong>Role:</strong>
-  <%= @user.role %>
+  <% if @user.role %>
+     admin 
+  <% else %>
+      regular 
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

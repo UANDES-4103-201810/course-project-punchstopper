@@ -19,6 +19,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project_promises = ProjectPromise.where("project_id= ?",@project.id)
+    @project_fundings = ProjectFunding.where("project_id= ?",@project.id)
+    @sum = ProjectFunding.where("project_id= ?",@project.id).sum(:amount)
   end
 
   # GET /projects/new
