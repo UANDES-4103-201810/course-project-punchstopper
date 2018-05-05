@@ -10,11 +10,11 @@
     <%= image_tag("logos/logo.png", size: "200x35", alt: "Edit Entry")%>
     </h1>
     <p align="center">Where the punches stop, and the kicks start</p>
-		<li><a href="">Projects</a></li>
-		<li><a href="">Profile</a></li>
+		<%= link_to "Explore", projects_path %>
 		<% if current_user %>
-			<%= link_to "My Projects", projects_path %>
-			<%= link_to "Wishlists", user_wishlists_path %>
+			<%= link_to "My Projects", projects_path(my_projects: true) %>
+			<%= link_to "Wishlist", user_wishlists_path %>
+			<%= link_to "Profile", current_user %>
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 		<% else %>
 			<%= link_to "Sign In", new_user_session_path %>
