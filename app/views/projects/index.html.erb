@@ -1,12 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Projects</h1>
-
+<h2>Categories:</h2>
+<% @categories.each do |category| %>
+  <% if params[:my_projects] %>
+     <%= link_to category.username, projects_path(my_projects: true,category: category.id) %>
+  <% else %>
+     <%= link_to category.username, projects_path(category: category.id) %>
+  <% end %>
+<% end %>
 <table>
   <thead>
     <tr>
       <th>Creator</th>
       <th>Title</th>
+      <th>Category</th>
       <th>Description</th>
       <th>Goal amount</th>
       <th>Finish date</th>
@@ -20,13 +28,20 @@
       <tr>
         <td><%= project.user.username %></td>
         <td><%= project.title %></td>
+        <% if  project.category_id.present? %>
+	    	<td><%= project.category.username %></td>
+        <% else %>
+	    	<td><%= "" %></td>
+        <% end %>
         <td><%= project.description %></td>
         <td><%= project.goal_amount %></td>
         <td><%= project.finish_date %></td>
         <td><%= project.delivery_date %></td>
         <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if  project.user.id == current_user.id %>
+		<td><%= link_to 'Edit', edit_project_path(project) %></td>
+		<td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
       </tr>
     <% end %>
   </tbody>

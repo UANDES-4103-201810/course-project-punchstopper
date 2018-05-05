@@ -4,8 +4,13 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    if params[:my_projects]
+    @categories = Category.all
+    if params[:my_projects] && params[:category].present?
+        @projects = Project.where("user_id = ?", current_user.id).where("category_id= ?", params[:category])
+    elsif params[:my_projects]
         @projects = Project.where("user_id = ?", current_user.id)
+    elsif params[:category].present?
+        @projects = Project.where("category_id= ?", params[:category])
     else
         @projects = Project.all
     end 
@@ -73,6 +78,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:user_id, :title, :description, :goal_amount, :finish_date, :delivery_date)
+      params.require(:project).permit(:user_id, :title, :description, :category_id, :goal_amount, :finish_date, :delivery_date)
     end
 end

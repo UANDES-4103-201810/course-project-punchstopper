@@ -11,6 +11,15 @@
 </p>
 
 <p>
+  <strong>Category:</strong>
+  <% if  @project.category_id.present? %>
+	<td><%= @project.category.username %></td>
+  <% else %>
+	<td><%= "" %></td>
+  <% end %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @project.description %>
 </p>
@@ -30,5 +39,7 @@
   <%= @project.delivery_date %>
 </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<% if  @project.user.id == current_user.id %>
+  <%= link_to 'Edit', edit_project_path(@project) %> |
+<% end %>
 <%= link_to 'Back', projects_path %>

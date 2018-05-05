@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   belongs_to :user
+  belongs_to :category, optional: true
   has_many :project_medium, dependent: :destroy
   has_many :project_fundings, dependent: :destroy
   has_many :project_promises, dependent: :destroy
