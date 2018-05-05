@@ -1,47 +1,21 @@
-<table>
 
 
-  <thead>
-  <tr>
-    <th>Options</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
+<body>
+  <% @projects.each do |project| %>
+<div class="project">
 
-    <tr>
-      <td><%= link_to 'User', users_path %></td>
-    </tr>
-    <tr>
-      <td><%= link_to 'Projects', projects_path %></td>
-    </tr>
+        <span><%= project.user.username %> is creating:</span>
+        <span><%= image_tag("logos/logo.png", size: "200x35", alt: "Edit Entry")%></span>
+        <span><%= project.title %></span>
+        <span><%= project.goal_amount %></span>
+        <span><%= project.finish_date %></span>
 
+</div>
+<% end %>
 
+<p style="text-align: center; font-family: 'URW Bookman L;'">
+  PunchStopper! is a webpage dedicated to<br>make people's dreams a reality via crowdfunding.<br>
+  Our promise is to give the best, easy to use and highly effective <br> web application to the users.
+</p>
 
-
-    <thead>
-    <tr>
-      <th>Creator</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Goal amount</th>
-      <th>Finish date</th>
-      <th>Delivery date</th>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.user.username %></td>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= project.goal_amount %></td>
-        <td><%= project.finish_date %></td>
-        <td><%= project.delivery_date %></td>
-        </tr>
-    <% end %>
-    </tbody>
-
-
-</table>
+</body>
