@@ -1,3 +1,4 @@
+<div class="project_item">
 <%= form_with(model: project_medium, local: true) do |form| %>
   <% if project_medium.errors.any? %>
     <div id="error_explanation">
@@ -30,3 +31,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>

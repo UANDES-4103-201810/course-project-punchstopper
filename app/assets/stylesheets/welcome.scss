@@ -8,6 +8,12 @@ body{
   background-size: cover;
 }
 
+.title{
+  margin-left: 14%;
+  font-size: 25px;
+  font-family: Monaco;
+}
+
 .grid-container{
   margin-left: 13%;
   display: grid;
@@ -24,15 +30,17 @@ body{
   width: 50%;
   Height:100%;
   align-content: center;
-  border: 5px solid red;
+  border: 5px solid black;
   margin: 10px;
   box-sizing: inherit;
+  background-color: red;
 }
 span.project_user{
   text-align: left;
   font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
   font-size: 10px;
   font-style: italic;
+  color: white;
 }
 .project_image{
 
@@ -43,10 +51,12 @@ span.project_user{
   font-size: 20px;
   font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
   text-align: center;
+  color: white;
 }
 
 .project_numbers{
   font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
   font-size: 10px;
   font-style: italic;
+  color: white;
 }

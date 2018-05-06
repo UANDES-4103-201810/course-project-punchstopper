@@ -1,4 +1,5 @@
 <%= form_with(model: user_wishlist, local: true) do |form| %>
+  <div class="project_item">
   <% if user_wishlist.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user_wishlist.errors.count, "error") %> prohibited this user_wishlist from being saved:</h2>
@@ -25,3 +26,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>
