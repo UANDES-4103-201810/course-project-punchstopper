@@ -15,6 +15,9 @@
 			<%= link_to "My Projects", projects_path(my_projects: true) %>
 			<%= link_to "Wishlist", user_wishlists_path %>
 			<%= link_to "Profile", current_user %>
+            <% if current_user.role %>
+                <%= link_to "Management", admin_path %>
+            <% end %>
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 		<% else %>
 			<%= link_to "Sign In", new_user_session_path %>

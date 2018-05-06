@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :user_wishlists
   get 'welcome/index'
+  
+  get 'admin', to: 'users#admin'
 
   resources :project_fundings
   resources :project_promises
