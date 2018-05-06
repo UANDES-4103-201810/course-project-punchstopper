@@ -1,17 +1,22 @@
 
 
 <body>
+<div class="grid-container">
   <% @projects.each do |project| %>
 <div class="project">
 
-        <span><%= project.user.username %> is creating:</span>
-        <span><%= image_tag("logos/logo.png", size: "200x35", alt: "Edit Entry")%></span>
-        <span><%= project.title %></span>
-        <span><%= project.goal_amount %></span>
-        <span><%= project.finish_date %></span>
+        <span class="project_user"><%= project.user.username %> is creating:</span><br>
+        <span class="project_image">
+          <%= image_tag("dummy.jpg", size: "200x150", alt: "Edit Entry")%>
+          <%= link_to  %>
+        </span><br>
+        <span class="project_title"><%= project.title %></span><br>
+        <span class="project_numbers"><%= project.goal_amount %></span>
+        <span class="project_numbers"><%= project.finish_date %></span>
 
 </div>
 <% end %>
+</div>
 
 <p style="text-align: center; font-family: 'URW Bookman L;'">
   PunchStopper! is a webpage dedicated to<br>make people's dreams a reality via crowdfunding.<br>
