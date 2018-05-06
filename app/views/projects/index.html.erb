@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="project_item">
 <h1>Projects</h1>
-<h2>Categories:</h2>
+<div class="category">Filter by Categories:</div>
 <% @categories.each do |category| %>
   <% if params[:my_projects] %>
      <%= link_to category.username, projects_path(my_projects: true,category: category.id) %>
@@ -9,47 +9,26 @@
      <%= link_to category.username, projects_path(category: category.id) %>
   <% end %>
 <% end %>
-<table>
-  <thead>
-    <tr>
-      <th>Creator</th>
-      <th>Title</th>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Goal amount</th>
-      <th>Finish date</th>
-      <th>Delivery date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div></div><br>
+	<div></div><br>
+	</div>
+	<div class="grid-container">
+	<% @projects.each do |project| %>
+		<div class="project">
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.user.username %></td>
-        <td><%= project.title %></td>
-        <% if  project.category_id.present? %>
-	    	<td><%= project.category.username %></td>
-        <% else %>
-	    	<td><%= "" %></td>
-        <% end %>
-        <td><%= project.description %></td>
-        <td><%= project.goal_amount %></td>
-        <td><%= project.finish_date %></td>
-        <td><%= project.delivery_date %></td>
-        <td><%= link_to 'Go to Project', project %></td>
-        <% if  current_user.present? %>
-		    <% if  project.user.id == current_user.id || current_user.role %>
-				<td><%= link_to 'Edit', edit_project_path(project) %></td>
-				<td><%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			<% end %>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+			<span class="project_user"><%= project.user.username %> is creating:</span><br>
+			<span class="project_image">
+	          <%= link_to (image_tag("dummy.jpg", size: "200x150", alt: "Edit Entry")), project %>
+	        </span><br>
+			<span class="project_title"><%= project.title %></span><br>
+			<span class="project_numbers"><%= project.goal_amount %></span>
+			<span class="project_numbers"><%= project.finish_date %></span>
+
+		</div>
+	<% end %>
+	</div>
 
 <br>
 
 <%= link_to 'New Project', new_project_path %>
-</div>
+
