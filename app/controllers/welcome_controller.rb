@@ -22,4 +22,6 @@ class WelcomeController < ApplicationController
   def project_params
     params.require(:project).permit(:user_id, :title, :description, :goal_amount, :finish_date, :delivery_date)
   end
+
+
 end
