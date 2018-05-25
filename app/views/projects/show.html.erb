@@ -47,12 +47,13 @@
 		<% end %>
 	  <% end %>
 	</p>
+        <%= link_to 'Back', projects_path, :class => "btn btn-info" %>
 	<% if  current_user.present? %>
 		<% if  @project.user.id == current_user.id || current_user.role %>
-			 <%= link_to 'Edit', edit_project_path(@project) %> |
+			 <%= link_to 'Edit', edit_project_path(@project), :class => "btn btn-success" %>
+                         <%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
 		<% end %>
 	<% end %>
-	<%= link_to 'Back', projects_path %>
 </div>
 
 <div style="margin-top:15px; margin-left:250px;">

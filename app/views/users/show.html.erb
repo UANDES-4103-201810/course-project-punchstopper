@@ -41,10 +41,10 @@
 
 
 <% if current_user.role || @user.id == current_user.id%>
-     <%= link_to 'Edit', edit_user_path(@user) %> 
+     <%= link_to 'Edit', edit_user_path(@user) , :class => "btn btn-success" %> 
 <% end %>
 <% if current_user.role %>
-     | <%= link_to 'Back', users_path %> 
+     | <%= link_to 'Back', users_path , :class => "btn btn-info" %> 
 <% end %>
 
 </div>

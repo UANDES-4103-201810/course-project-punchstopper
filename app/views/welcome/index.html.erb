@@ -6,16 +6,16 @@
 <div class="title">Trending Projects!</div>
 <div></div><br>
 <div class="grid-container">
-  <% @projects.where(outstanding: true) do |project| %>
-<div class="project">
-        <span class="project_user"><%= project.user.username %> is creating:</span><br>
-        <span class="project_image">
-          <%= link_to (image_tag("dummy.jpg", size: "200x150", alt: "Edit Entry")), project %>
-        </span><br>
-        <span class="project_title"><%= project.title %></span><br>
-        <span class="project_numbers"><%= project.goal_amount %></span>
-        <span class="project_numbers"><%= project.finish_date %></span>
-</div>
+  <% @projects.each do |project| %>
+	<div class="project">
+		<span class="project_user"><%= project.user.username %> is creating:</span><br>
+		<span class="project_image">
+		  <%= link_to (image_tag("dummy.jpg", size: "200x150", alt: "Edit Entry")), project %>
+		</span><br>
+		<span class="project_title"><%= project.title %></span><br>
+		<span class="project_numbers"><%= project.goal_amount %></span>
+		<span class="project_numbers"><%= project.finish_date %></span>
+	</div>
 <% end %>
 </div>
 

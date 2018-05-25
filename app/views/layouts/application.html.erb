@@ -9,27 +9,34 @@
     <h1  align="center">
     <%= image_tag("logos/logo.png", size: "200x35", alt: "Edit Entry")%>
     </h1>
+    
     <p style="font-style: italic" align="center">Where the Punches stop, and the Kicks start!</p>
-		<div align="center">
-		<%= link_to "Home", root_path %>
-		<%= link_to "Explore", projects_path %>
-		<% if current_user %>
-			<%= link_to "My Projects", projects_path(my_projects: true) %>
-			<%= link_to "Wishlist", user_wishlists_path %>
-			<%= link_to "Profile", current_user %>
-            <% if current_user.role %>
-                <%= link_to "Management", admin_path %>
-            <% end %>
-            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-		<% else %>
-			<%= link_to "Sign In", new_user_session_path %>
-		<% end %>
-		</div>
   </head>
 
   <body>
-	<p class="notice"><%= notice %></p>
+        <p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
+        <nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			  <ul class="nav navbar-nav">
+                           <li><%= link_to "Home", root_path %></li>
+			   <li><%= link_to "All Projects", projects_path %></li>
+                          </ul>
+                          <ul class="nav navbar-nav navbar-right">
+			   <% if current_user.present? %>
+                                <% if current_user.role %>
+		                    <li><%= link_to "Management", admin_path %></li>
+		                <% end %>
+				<li><%= link_to "My Projects", projects_path(my_projects: true) %></li>
+				<li><%= link_to "Wishlist", user_wishlists_path %></li>
+				<li><%= link_to "Profile", current_user %></li>
+		                <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+			   <% else %>
+			       <li><%= link_to "Sign In", new_user_session_path %></li>
+                           <% end %>
+			  </ul>
+		  </div>
+		</nav>
     <%= yield %>
   </body>
 </html>
