@@ -33,6 +33,12 @@ class ProjectsController < ApplicationController
   def edit
   end
 
+  def make_outstanding
+      @project = Project.find(params[:format])
+      @project.update(outstanding: !@project.outstanding?)
+  end
+
+
   # POST /projects
   # POST /projects.json
   def create

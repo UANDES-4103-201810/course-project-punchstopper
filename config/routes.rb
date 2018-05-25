@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   
   get 'admin', to: 'users#admin'
-
+  get 'make_outstanding', to: 'projects#make_outstanding'
   resources :project_fundings
   resources :project_promises
   resources :project_media

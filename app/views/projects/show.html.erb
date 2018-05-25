@@ -47,6 +47,12 @@
 		<% end %>
 	  <% end %>
 	</p>
+	<p>
+		<% if current_user.role %>
+			<%= button_to 'Outstanding', make_outstanding_path(@project.id), method: :get %>
+		<% end %>
+
+	</p>
 	<% if  current_user.present? %>
 		<% if  @project.user.id == current_user.id || current_user.role %>
 			 <%= link_to 'Edit', edit_project_path(@project) %> |
@@ -83,7 +89,6 @@
 				 <button>Add Promise</button>
 			<% end %>
 		<% end %>
-		
 
 		</div>
 	</div>
