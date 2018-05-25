@@ -5,10 +5,15 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @categories = Category.all
+    
     if params[:my_projects] && params[:category].present?
         @projects = Project.where("user_id = ?", current_user.id).where("category_id= ?", params[:category])
+    elsif params[:my_projects] && params[:outstanding]
+        @projects = Project.where("user_id = ?", current_user.id).where(outstanding: true)
     elsif params[:my_projects]
         @projects = Project.where("user_id = ?", current_user.id)
+    elsif params[:outstanding]
+        @projects = Project.where(outstanding: true)
     elsif params[:category].present?
         @projects = Project.where("category_id= ?", params[:category])
     else
@@ -37,6 +42,18 @@ class ProjectsController < ApplicationController
       @project = Project.find(params[:format])
       @project.update(outstanding: !@project.outstanding?)
       redirect_back fallback_location: @project
+  end
+
+  def add_promise
+  end
+
+  def create_promise
+    @promise = ProjectPromise.new(project_id: params[:project_id], description: params[:description], cost: params[:cost])
+    if @promise.save
+      redirect_to :action => "show", :id => params[:project_id]
+    else
+      redirect_back fallback_location: { action: "show", id: params[:project_id]}
+    end
   end
 
 

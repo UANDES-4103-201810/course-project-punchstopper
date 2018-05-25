@@ -92,7 +92,7 @@
 		</table>
                 <% if  current_user.present? %>
 			<% if  @project.user.id == current_user.id || current_user.role %>
-				 <button>Add Promise</button>
+				 <%= link_to 'Add Promise', add_promise_path(@project), :class => "btn btn-success" %>
 			<% end %>
 		<% end %>
 
