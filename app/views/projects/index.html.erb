@@ -7,6 +7,11 @@
   <% else %>
      <%= link_to 'Outstanding', projects_path(outstanding: true), :class => "btn btn-warning" %>
   <% end %>
+	<% if params[:my_projects] %>
+		<%= link_to 'Funded', projects_path(my_projects: true,outstanding: true), :class => "btn btn-warning" %>
+	<% else %>
+		<%= link_to 'Funded', projects_path(outstanding: true), :class => "btn btn-warning" %>
+	<% end %>
 <% @categories.each do |category| %>
   <% if params[:my_projects] %>
      <%= link_to category.username, projects_path(my_projects: true,category: category.id), :class => "btn btn-warning" %>

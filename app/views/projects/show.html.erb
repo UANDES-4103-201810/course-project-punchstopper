@@ -40,6 +40,11 @@
 
 	<h2>Goal: <%= @project.goal_amount %></h2>
 	<h2>Current Funding: <%= @sum %></h2>
+	<h2>
+	<% if @project.goal_amount<= @sum %>
+	Funded!
+	<%end%>
+	</h2>
 	<p>
 	  <% if  current_user.present? %>
 		<% if  @project.user.id != current_user.id || current_user.role %>
@@ -135,7 +140,7 @@
 		</table>
 		<% if  current_user.present? %>
 			<% if  @project.user.id != current_user.id || current_user.role %>
-				 <button>Back Project</button>
+				<%= link_to 'Back this project', add_funding_path(@project), :class => "btn btn-success" %>
 			<% end %>
 		<% end %>
 	</div>

@@ -38,6 +38,18 @@ class ProjectsController < ApplicationController
   def edit
   end
 
+  def add_funding
+  end
+
+  def create_funding
+    @funding = ProjectFunding.new(project_id: params[:project_id], user_id: current_user.id, amount: params[:amount])
+    if @funding.save
+      redirect_to :action => "show", :id => params[:project_id]
+    else
+      redirect_back fallback_location: { action: "show", id: params[:project_id]}
+    end
+  end
+
   def make_outstanding
       @project = Project.find(params[:format])
       @project.update(outstanding: !@project.outstanding?)
