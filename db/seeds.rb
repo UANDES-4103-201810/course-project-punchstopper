@@ -15,11 +15,11 @@ Category1= Category.create(username: 'Gaming')
 Category2= Category.create(username: 'Animals')
 
 
-Project1 = Project.create(user_id: User1.id , title: 'Cool Project', description: 'A project which is cool.', goal_amount: 10000, finish_date: DateTime.now, delivery_date: DateTime.now)
+Project1 = Project.create(user_id: User1.id , title: 'Cool Project', description: 'A project which is cool.', goal_amount: 10000, finish_date: DateTime.now, delivery_date: DateTime.now, outstanding: true)
 Project2 = Project.create(user_id: User2.id , title: 'Good Game', description: 'A game which is good.', goal_amount: 100000, finish_date: DateTime.now, delivery_date: DateTime.now, category: Category1)
-Project3 = Project.create(user_id: User3.id , title: 'Regular project', description: 'A project which is regular.', goal_amount: 1000, finish_date: DateTime.now, delivery_date: DateTime.now)
+Project3 = Project.create(user_id: User3.id , title: 'Regular project', description: 'A project which is regular.', goal_amount: 1000, finish_date: DateTime.now, delivery_date: DateTime.now, outstanding: true)
 Project4 = Project.create(user_id: User4.id , title: 'Bad Project', description: 'A project which is bad.', goal_amount: 100, finish_date: DateTime.now, delivery_date: DateTime.now)
-Project5 = Project.create(user_id: User1.id , title: 'Something for animals', description: 'Something which is for animals.', goal_amount: 1000, finish_date: DateTime.now, delivery_date: DateTime.now, category: Category2)
+Project5 = Project.create(user_id: User1.id , title: 'Something for animals', description: 'Something which is for animals.', goal_amount: 1000, finish_date: DateTime.now, delivery_date: DateTime.now, category: Category2, outstanding: true)
 
 
 Wishlist1=UserWishlist.create(user_id: User1.id, project_id: Project2.id)

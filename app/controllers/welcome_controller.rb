@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.where(outstanding: true)
   end
 
   # GET /projects/1

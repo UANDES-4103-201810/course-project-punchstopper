@@ -2,24 +2,26 @@
 <div class="project_item">
 <h1>User Wishlists</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="col-xs-6">
+	<table class="table table-bordered">
+	  <thead>
+		<tr>
+		  <th>Project</th>
+		  <th colspan="3"></th>
+		</tr>
+	  </thead>
 
-  <tbody>
-    <% @user_wishlists.each do |user_wishlist| %>
-      <tr>
-        <td><%= user_wishlist.project.title %></td>
-        <td><%= link_to 'Go to Project', user_wishlist.project %></td>
-        <td><%= link_to 'Delete', user_wishlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	  <tbody>
+		<% @user_wishlists.each do |user_wishlist| %>
+		  <tr>
+		    <td><%= user_wishlist.project.title %></td>
+		    <td><%= link_to 'Go to Project', user_wishlist.project , :class => "btn btn-info" %></td>
+		    <td><%= link_to 'Delete', user_wishlist, method: :delete, data: { confirm: 'Are you sure?' } , :class => "btn btn-danger" %></td>
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
+</div>
 
 <br>
 </div>
