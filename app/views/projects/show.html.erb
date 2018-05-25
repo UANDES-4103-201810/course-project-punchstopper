@@ -49,9 +49,12 @@
 	</p>
 	<p>
 		<% if current_user.role %>
-			<%= button_to 'Outstanding', make_outstanding_path(@project.id), method: :get %>
+			<% if @project.outstanding? %>
+			<%= link_to 'Remove Outstanding', make_outstanding_path(@project.id), method: :get, :class => "btn btn-danger" %>
+			<% else %>
+				<%= link_to 'Make Outstanding!', make_outstanding_path(@project.id), method: :get, :class => "btn btn-success" %>
 		<% end %>
-
+		<% end %>
 	</p>
 <p>
         <%= link_to 'Back', projects_path, :class => "btn btn-info" %>

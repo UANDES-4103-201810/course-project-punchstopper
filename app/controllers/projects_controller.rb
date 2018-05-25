@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
   def make_outstanding
       @project = Project.find(params[:format])
       @project.update(outstanding: !@project.outstanding?)
+      redirect_back fallback_location: @project
   end
 
 

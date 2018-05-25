@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20180505050138) do
   create_table "projects", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
+    t.boolean "outstanding"
     t.text "description"
     t.integer "goal_amount"
     t.date "finish_date"
