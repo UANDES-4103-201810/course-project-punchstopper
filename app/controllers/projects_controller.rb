@@ -55,6 +55,12 @@ class ProjectsController < ApplicationController
       redirect_back fallback_location: { action: "show", id: params[:project_id]}
     end
   end
+  
+  def fund_through_promise
+      @promise = ProjectPromise.find(params[:promise_id])
+      ProjectFunding.create(project_id: params[:format], user_id: current_user.id, project_promise_id: @promise.id, amount: @promise.cost)
+      redirect_back fallback_location: @project
+  end
 
 
   # POST /projects

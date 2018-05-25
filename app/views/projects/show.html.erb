@@ -48,13 +48,15 @@
 	  <% end %>
 	</p>
 	<p>
+	<% if current_user.present? %>
 		<% if current_user.role %>
 			<% if @project.outstanding? %>
-			<%= link_to 'Remove Outstanding', make_outstanding_path(@project.id), method: :get, :class => "btn btn-danger" %>
+				<%= link_to 'Remove Outstanding', make_outstanding_path(@project.id), method: :get, :class => "btn btn-danger" %>
 			<% else %>
 				<%= link_to 'Make Outstanding!', make_outstanding_path(@project.id), method: :get, :class => "btn btn-success" %>
+			<% end %>
 		<% end %>
-		<% end %>
+	<% end %>
 	</p>
 <p>
         <%= link_to 'Back', projects_path, :class => "btn btn-info" %>
@@ -85,7 +87,11 @@
 			  <tr>
 			    <td><%= project_promise.description %></td>
 			    <td><%= project_promise.cost %></td>
-			    <td><%= link_to 'Buy' %></td>
+			    <% if current_user.present? %>
+                                  <% if current_user.id != @project.user_id %>
+     				      <td><%= link_to 'Buy', fund_through_promise_path(@project.id, :promise_id => project_promise.id), method: :get, :class => "btn btn-info" %></td>
+                                  <% end %>
+			    <% end %>
 			  </tr>
 			<% end %>
 		  </tbody>
