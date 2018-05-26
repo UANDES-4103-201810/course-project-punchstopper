@@ -15,7 +15,10 @@
     <%= form.label :title %>
     <%= form.text_field :title, id: :project_title %>
   </div>
-
+  <div class="field">
+    <%= form.label :photo %>
+    <%= form.file_field :photo %>
+  </div>
   <div class="field">
     <%= form.label :category_id, "Select Category" %>
     <%= form.collection_select :category_id, Category.all, :id, :username, prompt: "No Category", :selected => @project.category_id  %>

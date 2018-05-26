@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   has_many :project_fundings, dependent: :destroy
   has_many :project_promises, dependent: :destroy
   has_many :user_wishlists, dependent: :destroy
+  has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/dummy.png"
+  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
   validates :user,:title,:goal_amount,:finish_date,:delivery_date, presence: true
   validates :goal_amount, numericality: {greater_than: 0}

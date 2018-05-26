@@ -25,7 +25,7 @@
 
 			<span class="project_user"><%= project.user.username %> is creating:</span><br>
 			<span class="project_image">
-	          <%= link_to (image_tag("dummy.jpg", size: "200x150", alt: "Edit Entry")), project %>
+	          <%= link_to (image_tag(project.photo.url (:thumb), size: "200x150", alt: "Edit Entry")), project %>
 	        </span><br>
 			<span class="project_title"><%= project.title %></span><br>
 			<span class="project_numbers"><%= project.goal_amount %></span>

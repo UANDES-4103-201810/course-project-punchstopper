@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <div class="project_item">
-<div class="col-xs-4">
+<div class="col-xs-6">
+	<div class="col-xs-5">
 	<p>
 	<% if current_user.present? %>
 		<% if  @project.user.id != current_user.id || current_user.role %>
@@ -67,6 +68,10 @@
                          <%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
 		<% end %>
 	<% end %>
+	</div>
+	<div class="col-xs-1" style="margin-top: 100px; ">
+		<%= image_tag @project.photo.url (:medium) %>
+	</div>
 </div>
 
 <div >
@@ -104,44 +109,11 @@
                 <% if  current_user.present? %>
 			<% if  @project.user.id == current_user.id || current_user.role %>
 				 <%= link_to 'Add Promise', add_promise_path(@project), :class => "btn btn-success" %>
+				 <%= link_to 'Back this project with money!', add_funding_path(@project), :class => "btn btn-success" %>
 			<% end %>
 		<% end %>
 
 		</div>
-	</div>
-
-
-	<div class="col-xs-3">
-		<h2>Fundings</h2>
-
-		<table class="table table-bordered">
-		  <thead>
-			<tr>
-			  <th>User</th>
-			  <th>Project promise</th>
-			  <th>Amount</th>
-			</tr>
-		  </thead>
-
-		  <tbody>
-			<% @project_fundings.each do |project_funding| %>
-			  <tr>
-			    <td><%= project_funding.user.username %></td>
-			    <% if project_funding.project_promise.present? %>
-			    	<td><%= project_funding.project_promise.description %></td>
-			    <% else %>
-				<td>-</td>
-			    <% end %>
-			    <td><%= project_funding.amount %></td>
-			  </tr>
-			<% end %>
-		  </tbody>
-		</table>
-		<% if  current_user.present? %>
-			<% if  @project.user.id != current_user.id || current_user.role %>
-				<%= link_to 'Back this project', add_funding_path(@project), :class => "btn btn-success" %>
-			<% end %>
-		<% end %>
 	</div>
 </div>
 
