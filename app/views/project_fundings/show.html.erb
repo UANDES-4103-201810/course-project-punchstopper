@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<div class="project_item">
+<p>
+  <strong>Project:</strong>
+  <%= @project_funding.project %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project_funding.user %>
+</p>
+
+<p>
+  <strong>Project promise:</strong>
+  <%= @project_funding.project_promise %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @project_funding.amount %>
+</p>
+
+<%= link_to 'Edit', edit_project_funding_path(@project_funding) %> |
+<%= link_to 'Back', project_fundings_path %>
+</div>

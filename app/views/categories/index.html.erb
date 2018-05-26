@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<div class="project_item">
+<h1>Categories</h1>
+
+<div class="col-xs-6">
+	<table class="table table-bordered">
+	  <thead>
+	    <tr>
+	      <th>Username</th>
+	      <th colspan="2"></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @categories.each do |category| %>
+	      <tr>
+		<td><%= category.username %></td>
+		<td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-success" %></td>
+		<td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+
+<br>
+
+<%= link_to 'New Category', new_category_path, :class => "btn btn-info" %>
+</div>
+</div>

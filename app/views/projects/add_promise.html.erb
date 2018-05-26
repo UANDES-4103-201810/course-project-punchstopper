@@ -1,0 +1,19 @@
+<div class="project_item">
+<h1>Add New Promise</h1>
+
+<%= form_tag(:controller => "projects", :action => "create_promise") do %>
+  <p>
+  <%= label_tag :description %>  
+  <%= text_field_tag(:description) %>
+  </p>
+  <p>
+  <%= label_tag :cost %>  
+  <%= number_field_tag(:cost) %>
+  </p>
+  <p>
+  <%= submit_tag "Submit"%>
+  </p>  
+<% end %>  
+
+<%= link_to 'Back', projects_path %>
+</div>

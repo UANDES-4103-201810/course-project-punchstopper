@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<div class="project_item">
+<h1>Projects<%= link_to 'New Project', new_project_path, :class => "btn btn-success", :style => "margin: 10px;" %></h1>
+<div class="category">Filter by Categories:</div>
+  <% if params[:my_projects] %>
+     <%= link_to 'Outstanding', projects_path(my_projects: true,outstanding: true), :class => "btn btn-warning" %>
+     <%= link_to 'Funded', projects_path(my_projects: true,funded: true), :class => "btn btn-warning" %>
+  <% else %>
+     <%= link_to 'Outstanding', projects_path(outstanding: true), :class => "btn btn-warning" %>
+     <%= link_to 'Funded', projects_path(funded: true), :class => "btn btn-warning" %>
+  <% end %>
+<% @categories.each do |category| %>
+  <% if params[:my_projects] %>
+     <%= link_to category.username, projects_path(my_projects: true,category: category.id), :class => "btn btn-warning" %>
+  <% else %>
+     <%= link_to category.username, projects_path(category: category.id), :class => "btn btn-warning" %>
+  <% end %>
+<% end %>
+<div></div><br>
+	<div></div><br>
+	</div>
+	<div class="grid-container">
+	<% @projects.each do |project| %>
+		<div class="project">
+
+			<span class="project_user"><%= project.user.username %> is creating:</span><br>
+			<span class="project_image">
+	          <%= link_to (image_tag("dummy.jpg", size: "200x150", alt: "Edit Entry")), project %>
+	        </span><br>
+			<span class="project_title"><%= project.title %></span><br>
+			<span class="project_numbers"><%= project.goal_amount %></span>
+			<span class="project_numbers"><%= project.finish_date %></span>
+
+		</div>
+	<% end %>
+	</div>
+</div>
+<br>
+

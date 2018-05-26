@@ -1,0 +1,33 @@
+<div class="project_item">
+<p id="notice"><%= notice %></p>
+
+<h1>Project Promises</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Description</th>
+      <th>Cost</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_promises.each do |project_promise| %>
+      <tr>
+        <td><%= project_promise.project.title %></td>
+        <td><%= project_promise.description %></td>
+        <td><%= project_promise.cost %></td>
+        <td><%= link_to 'Show', project_promise %></td>
+        <td><%= link_to 'Edit', edit_project_promise_path(project_promise) %></td>
+        <td><%= link_to 'Destroy', project_promise, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project Promise', new_project_promise_path %>
+</div>

@@ -1,0 +1,33 @@
+<div class="project_item">
+<p id="notice"><%= notice %></p>
+
+<h1>Project Media</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Link</th>
+      <th>Link type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_media.each do |project_medium| %>
+      <tr>
+        <td><%= project_medium.project.title %></td>
+        <td><%= project_medium.link %></td>
+        <td><%= project_medium.link_type %></td>
+        <td><%= link_to 'Show', project_medium %></td>
+        <td><%= link_to 'Edit', edit_project_medium_path(project_medium) %></td>
+        <td><%= link_to 'Destroy', project_medium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project Medium', new_project_medium_path %>
+</div>

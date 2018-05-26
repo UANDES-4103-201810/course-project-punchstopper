@@ -1,0 +1,21 @@
+<div class="project_item">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @project_medium.project %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @project_medium.link %>
+</p>
+
+<p>
+  <strong>Link type:</strong>
+  <%= @project_medium.link_type %>
+</p>
+
+<%= link_to 'Edit', edit_project_medium_path(@project_medium) %> |
+<%= link_to 'Back', project_media_path %>
+</div>
