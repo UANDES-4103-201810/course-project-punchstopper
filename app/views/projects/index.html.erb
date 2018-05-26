@@ -4,13 +4,10 @@
 <div class="category">Filter by Categories:</div>
   <% if params[:my_projects] %>
      <%= link_to 'Outstanding', projects_path(my_projects: true,outstanding: true), :class => "btn btn-warning" %>
+     <%= link_to 'Funded', projects_path(my_projects: true,funded: true), :class => "btn btn-warning" %>
   <% else %>
      <%= link_to 'Outstanding', projects_path(outstanding: true), :class => "btn btn-warning" %>
-  <% end %>
-  <% if params[:my_projects] %>
-	<%= link_to 'Funded', projects_path(my_projects: true,funded: true), :class => "btn btn-warning" %>
-  <% else %>
-	<%= link_to 'Funded', projects_path(funded: true), :class => "btn btn-warning" %>
+     <%= link_to 'Funded', projects_path(funded: true), :class => "btn btn-warning" %>
   <% end %>
 <% @categories.each do |category| %>
   <% if params[:my_projects] %>
