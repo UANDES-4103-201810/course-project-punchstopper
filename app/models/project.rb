@@ -11,6 +11,12 @@ class Project < ApplicationRecord
   validate :date_cannot_be_in_the_past
   validate :cant_deliver_before_finish
 
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  has_attached_file :avatar, styles: { medium: "200x150", thumb: "100x100" }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   def date_cannot_be_in_the_past
     if finish_date.present? && finish_date < Date.today
       errors.add(:finish_date, "Can not be in the past")
