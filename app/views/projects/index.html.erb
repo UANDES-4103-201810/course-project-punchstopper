@@ -2,16 +2,16 @@
 <div class="project_item">
 <h1>Projects<%= link_to 'New Project', new_project_path, :class => "btn btn-success", :style => "margin: 10px;" %></h1>
 <div class="category">Filter by Categories:</div>
-<% if params[:my_projects] %>
+  <% if params[:my_projects] %>
      <%= link_to 'Outstanding', projects_path(my_projects: true,outstanding: true), :class => "btn btn-warning" %>
   <% else %>
      <%= link_to 'Outstanding', projects_path(outstanding: true), :class => "btn btn-warning" %>
   <% end %>
-	<% if params[:my_projects] %>
-		<%= link_to 'Funded', projects_path(my_projects: true,outstanding: true), :class => "btn btn-warning" %>
-	<% else %>
-		<%= link_to 'Funded', projects_path(outstanding: true), :class => "btn btn-warning" %>
-	<% end %>
+  <% if params[:my_projects] %>
+	<%= link_to 'Funded', projects_path(my_projects: true,funded: true), :class => "btn btn-warning" %>
+  <% else %>
+	<%= link_to 'Funded', projects_path(funded: true), :class => "btn btn-warning" %>
+  <% end %>
 <% @categories.each do |category| %>
   <% if params[:my_projects] %>
      <%= link_to category.username, projects_path(my_projects: true,category: category.id), :class => "btn btn-warning" %>
