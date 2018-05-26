@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   
   get 'admin', to: 'users#admin'
   get 'make_outstanding', to: 'projects#make_outstanding'
+  get 'add_to_wishlist', to: 'projects#add_to_wishlist'
   get '/projects/:project_id/add_funding', to: 'projects#add_funding', as: 'add_funding'
   post 'projects/:project_id/create_funding', to: 'projects#create_funding'
   get 'fund_through_promise', to: 'projects#fund_through_promise'

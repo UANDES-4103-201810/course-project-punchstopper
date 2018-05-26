@@ -74,6 +74,14 @@ class ProjectsController < ApplicationController
       redirect_back fallback_location: @project
   end
 
+  def add_to_wishlist
+      @UserWishlist = UserWishlist.where("user_id = ? ", current_user.id).where("project_id = ? ", params[:format])
+      if !@UserWishlist.present?
+      	UserWishlist.create(user_id: current_user.id, project_id: params[:format]) 
+      end
+      redirect_back fallback_location: @project     
+  end
+
   def add_promise
   end
 

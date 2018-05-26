@@ -48,7 +48,7 @@
 	<p>
 	  <% if  current_user.present? %>
 		<% if  @project.user.id != current_user.id || current_user.role %>
-			<button>Add Project to Wishlist</button>
+			<%= link_to 'Add to Wishlist', add_to_wishlist_path(@project.id), method: :get, :class => "btn btn-info" %>
 		<% end %>
 	  <% end %>
 	</p>
