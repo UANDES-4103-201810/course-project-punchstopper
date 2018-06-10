@@ -5,30 +5,33 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @categories = Category.all
-    
-    if params[:my_projects] && params[:category].present?
+    if params[:my_projects] && params[:search].present?
+        @projects = Project.where("user_id = ?", current_user.id).where('title LIKE ?', "%#{params[:search]}%")
+    elsif params[:search].present?
+        @projects = Project.where('title LIKE ?', "%#{params[:search]}%")
+    elsif params[:my_projects] && params[:category].present?
         @projects = Project.where("user_id = ?", current_user.id).where("category_id= ?", params[:category])
     elsif params[:my_projects] && params[:outstanding]
         @projects = Project.where("user_id = ?", current_user.id).where(outstanding: true)
     elsif params[:my_projects] && params[:funded]
         @allprojects = Project.where("user_id = ?", current_user.id)
-	@projects = []
-	@allprojects.each do |project|
-	  @sum = ProjectFunding.where("project_id= ?",project.id).sum(:amount)
-	  if @sum >= project.goal_amount
-	    @projects<<(project)
-	  end
+	      @projects = []
+	      @allprojects.each do |project|
+	        @sum = ProjectFunding.where("project_id= ?",project.id).sum(:amount)
+    	    if @sum >= project.goal_amount
+    	      @projects<<(project)
+    	    end
         end
     elsif params[:my_projects]
         @projects = Project.where("user_id = ?", current_user.id)
     elsif params[:funded]
         @allprojects = Project.all
-	@projects = []
-	@allprojects.each do |project|
-	  @sum = ProjectFunding.where("project_id= ?",project.id).sum(:amount)
-	  if @sum >= project.goal_amount
-	    @projects<<(project)
-	  end
+	      @projects = []
+	      @allprojects.each do |project|
+	        @sum = ProjectFunding.where("project_id= ?",project.id).sum(:amount)
+  	      if @sum >= project.goal_amount
+  	        @projects<<(project)
+  	      end
         end
     elsif params[:outstanding]
         @projects = Project.where(outstanding: true)
