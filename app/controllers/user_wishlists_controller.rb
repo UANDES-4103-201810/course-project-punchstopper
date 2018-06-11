@@ -56,7 +56,7 @@ class UserWishlistsController < ApplicationController
   def destroy
     @user_wishlist.destroy
     respond_to do |format|
-      format.html { redirect_to user_wishlists_url, notice: 'User wishlist was successfully destroyed.' }
+      format.html { redirect_to user_wishlists_url, notice: 'Project was successfully removed from wishlist.' }
       format.json { head :no_content }
     end
   end

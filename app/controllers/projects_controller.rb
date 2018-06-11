@@ -65,6 +65,7 @@ class ProjectsController < ApplicationController
   def create_funding
     @funding = ProjectFunding.new(project_id: params[:project_id], user_id: current_user.id, amount: params[:amount])
     if @funding.save
+      flash[:notice] = 'You funded the Project successfully.'
       redirect_to :action => "show", :id => params[:project_id]
     else
       redirect_back fallback_location: { action: "show", id: params[:project_id]}
@@ -73,6 +74,12 @@ class ProjectsController < ApplicationController
 
   def make_outstanding
       @project = Project.find(params[:format])
+      if @project.outstanding
+        flash[:notice] = 'The Project is no longer Outstanding.'
+      else
+        flash[:notice] = 'The Project is now Outstanding.'
+      end
+
       @project.update(outstanding: !@project.outstanding?)
       redirect_back fallback_location: @project
   end
@@ -81,6 +88,7 @@ class ProjectsController < ApplicationController
       @UserWishlist = UserWishlist.where("user_id = ? ", current_user.id).where("project_id = ? ", params[:format])
       if !@UserWishlist.present?
       	UserWishlist.create(user_id: current_user.id, project_id: params[:format]) 
+        flash[:notice] = 'Added to Wishlist successfully.'
       end
       redirect_back fallback_location: @project     
   end
@@ -91,8 +99,10 @@ class ProjectsController < ApplicationController
   def create_promise
     @promise = ProjectPromise.new(project_id: params[:project_id], description: params[:description], cost: params[:cost])
     if @promise.save
+      flash[:notice] = 'The Promise was successfully created.'
       redirect_to :action => "show", :id => params[:project_id]
     else
+      flash[:notice] = 'Fill all parameters.'
       redirect_back fallback_location: { action: "show", id: params[:project_id]}
     end
   end
@@ -100,7 +110,7 @@ class ProjectsController < ApplicationController
   def fund_through_promise
       @promise = ProjectPromise.find(params[:promise_id])
       ProjectFunding.create(project_id: params[:format], user_id: current_user.id, project_promise_id: @promise.id, amount: @promise.cost)
-      redirect_back fallback_location: @project
+      redirect_back fallback_location: @project, notice: "You bought a  #{@promise.description} successfully"
   end
 
 
