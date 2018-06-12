@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
@@ -64,6 +65,7 @@ class ProjectsController < ApplicationController
 
   def create_funding
     @funding = ProjectFunding.new(project_id: params[:project_id], user_id: current_user.id, amount: params[:amount])
+    authorize! :fund_project, @funding.project
     if @funding.save
       flash[:notice] = 'You funded the Project successfully.'
       redirect_to :action => "show", :id => params[:project_id]
@@ -74,6 +76,7 @@ class ProjectsController < ApplicationController
 
   def make_outstanding
       @project = Project.find(params[:format])
+      authorize! :make_project_outstanding, @project
       if @project.outstanding
         flash[:notice] = 'The Project is no longer Outstanding.'
       else
@@ -98,6 +101,7 @@ class ProjectsController < ApplicationController
 
   def create_promise
     @promise = ProjectPromise.new(project_id: params[:project_id], description: params[:description], cost: params[:cost])
+    authorize! :manage, @promise.project
     if @promise.save
       flash[:notice] = 'The Promise was successfully created.'
       redirect_to :action => "show", :id => params[:project_id]
@@ -109,6 +113,7 @@ class ProjectsController < ApplicationController
   
   def fund_through_promise
       @promise = ProjectPromise.find(params[:promise_id])
+      authorize! :fund_project, @promise.project
       ProjectFunding.create(project_id: params[:format], user_id: current_user.id, project_promise_id: @promise.id, amount: @promise.cost)
       redirect_back fallback_location: @project, notice: "You bought a  #{@promise.description} successfully"
   end
