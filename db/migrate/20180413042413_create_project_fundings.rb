@@ -5,6 +5,7 @@ class CreateProjectFundings < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.references :project_promise, foreign_key: true
       t.integer :amount
+      t.boolean :accepted , default: false
 
       t.timestamps
     end

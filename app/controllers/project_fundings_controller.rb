@@ -56,7 +56,7 @@ class ProjectFundingsController < ApplicationController
   def destroy
     @project_funding.destroy
     respond_to do |format|
-      format.html { redirect_to project_fundings_url, notice: 'Project funding was successfully destroyed.' }
+      format.html { redirect_to pending_funds_path, notice: 'The Funding was rejected successfully.' }
       format.json { head :no_content }
     end
   end

@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
   def show
     @project_promises = ProjectPromise.where("project_id= ?",@project.id)
     @project_fundings = ProjectFunding.where("project_id= ?",@project.id)
-    @sum = ProjectFunding.where("project_id= ?",@project.id).sum(:amount)
+    @sum = ProjectFunding.where("project_id= ?",@project.id).where("accepted= ?", true).sum(:amount)
   end
 
   # GET /projects/new
@@ -61,6 +61,7 @@ class ProjectsController < ApplicationController
   end
 
   def add_funding
+    @project=Project.find(params[:project_id])
   end
 
   def create_funding
@@ -97,6 +98,7 @@ class ProjectsController < ApplicationController
   end
 
   def add_promise
+    @project=Project.find(params[:project_id])
   end
 
   def create_promise
@@ -116,6 +118,17 @@ class ProjectsController < ApplicationController
       authorize! :fund_project, @promise.project
       ProjectFunding.create(project_id: params[:format], user_id: current_user.id, project_promise_id: @promise.id, amount: @promise.cost)
       redirect_back fallback_location: @project, notice: "You bought a  #{@promise.description} successfully"
+  end
+
+  def pending_funds
+    @projects = Project.where("user_id = ? ", current_user.id)
+  end
+
+  def accept_funds
+    @funding = ProjectFunding.find(params[:format])
+    @funding.update(accepted: true)
+    flash[:notice] = 'The Funding was accepted successfully.'
+    redirect_to :action => "pending_funds"
   end
 
 

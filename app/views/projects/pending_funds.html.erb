@@ -1,0 +1,38 @@
+<div class="project_item">
+<p id="notice"><%= notice %></p>
+<% @projects.each do |project| %>
+	<% if project.project_fundings.where("accepted = ? ", false).count > 0 %>
+		<div class="col-xs-10">
+			<h3><%= project.title %></h3>
+		    <table class="table table-bordered">
+				<thead>
+				  <tr>
+				    <th>User</th>
+				    <th>Project promise</th>
+				    <th>Amount</th>
+				    <th colspan="2"></th>
+				  </tr>
+				</thead>
+
+				<tbody>
+				  <% project.project_fundings.each do |project_funding| %>
+				  	<% if !project_funding.accepted %>
+					    <tr>
+					      <td><%= project_funding.user.username %></td>
+					      <% if project_funding.project_promise.present? %>
+					      	<td><%= project_funding.project_promise.description %></td>
+					      <% else %>
+					      	<td></td>
+					      <% end %>
+					      <td><%= project_funding.amount %></td>
+					      <td><%= link_to 'Accept', accept_funds_path(project_funding) , :class => "btn btn-success" %></td>
+					      <td><%= link_to 'Reject', project_funding, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+					    </tr>
+					<% end %>    
+				  <% end %>
+				</tbody>
+			</table>
+		</div>
+	<% end %>
+<% end %>
+</div>
