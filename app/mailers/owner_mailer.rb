@@ -8,6 +8,6 @@ class OwnerMailer < ApplicationMailer
   def funding_notification(user)
     @greeting = "You have a new pending fund for your project"
 
-    mail to: user.email, subject: "PunchStopper - You have a new pending fund for your project"
+    mail to: user.email, subject: "PunchStopper - You have a new pending fund for your project."
   end
 end

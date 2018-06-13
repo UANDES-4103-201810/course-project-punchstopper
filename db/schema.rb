@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20180526025510) do
     t.integer "user_id"
     t.integer "project_promise_id"
     t.integer "amount"
+    t.boolean "accepted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_project_fundings_on_project_id"
