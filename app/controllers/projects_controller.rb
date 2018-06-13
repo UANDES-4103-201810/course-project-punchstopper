@@ -66,8 +66,10 @@ class ProjectsController < ApplicationController
 
   def create_funding
     @funding = ProjectFunding.new(project_id: params[:project_id], user_id: current_user.id, amount: params[:amount])
+    @project=Project.find(params[:project_id])
     authorize! :fund_project, @funding.project
     if @funding.save
+      OwnerMailer.funding_notification(@project.user).deliver
       flash[:notice] = 'You funded the Project successfully.'
       redirect_to :action => "show", :id => params[:project_id]
     else
@@ -116,6 +118,8 @@ class ProjectsController < ApplicationController
   def fund_through_promise
       @promise = ProjectPromise.find(params[:promise_id])
       authorize! :fund_project, @promise.project
+      @project=Project.find(params[:project_id])
+      OwnerMailer.funding_notification(@project.user).deliver
       ProjectFunding.create(project_id: params[:format], user_id: current_user.id, project_promise_id: @promise.id, amount: @promise.cost)
       redirect_back fallback_location: @project, notice: "You bought a  #{@promise.description} successfully"
   end
